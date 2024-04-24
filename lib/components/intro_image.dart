@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class IntroImage extends StatelessWidget {
-  final String images, title;
+  final String images, title,des;
   const IntroImage({
     super.key,
     required this.images,
     required this.title,
+    required this.des,
   });
 
   @override
@@ -30,7 +31,7 @@ class IntroImage extends StatelessWidget {
             ),
           ),
           Text(
-            title,
+            des,
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.grey),
           ),

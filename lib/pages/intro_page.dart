@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable, prefer_final_fields
 
 import 'package:flutter/material.dart';
+import 'package:grocery_store/components/intro_image.dart';
 import 'package:grocery_store/pages/home_page.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -65,33 +66,10 @@ class _IntroPageState extends State<IntroPage> {
                 controller: _controller,
                 itemCount: images.length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    padding: EdgeInsets.all(20),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 30),
-                          child: Image.asset(
-                            "assets/images/${images[index]}",
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            title[index][0],
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 24),
-                          ),
-                        ),
-                        Text(
-                          title[index][1],
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                      ],
-                    ),
+                  return IntroImage(
+                    images: images[index],
+                    title: title[index][0],
+                    des: title[index][1],
                   );
                 },
               ),
