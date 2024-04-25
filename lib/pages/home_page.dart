@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_store/model/fruit_model.dart';
@@ -189,16 +187,19 @@ class HomePage extends StatelessWidget {
               //Grid view
               Container(
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 9),
+                padding: EdgeInsets.symmetric(horizontal: 17),
                 child: GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: fruits.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2),
+                      crossAxisSpacing: 17,
+                      mainAxisSpacing: 17,
+                      crossAxisCount: 2,
+                      childAspectRatio: 1 / 1.45),
                   itemBuilder: (context, index) {
                     return Container(
-                      margin: EdgeInsets.all(8),
+                      // margin: EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: Color(0xFFFFFFFF),
                         borderRadius: BorderRadius.circular(10),
@@ -220,7 +221,7 @@ class HomePage extends StatelessWidget {
                             children: [
                               Container(
                                 height: 100,
-                                width: 100,
+                                width: 120,
                               ),
                               Positioned(
                                 top: 0,
@@ -237,10 +238,10 @@ class HomePage extends StatelessWidget {
                               ),
                               Positioned(
                                 bottom: 5,
-                                left: 5,
+                                // left: 5,
                                 child: Image.asset(
                                   fruits[index].image,
-                                  height: 70,
+                                  height: 80,
                                 ),
                               ),
                             ],
@@ -260,7 +261,33 @@ class HomePage extends StatelessWidget {
                           ),
                           Text(
                             fruits[index].weight,
-                          )
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          SizedBox(height: 5),
+                          Divider(
+                            color: Colors.grey[300],
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(5),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  "assets/icons/shop_bag.png",
+                                  height: 18,
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  "Add to cart",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
+                                )
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     );
