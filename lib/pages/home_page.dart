@@ -1,7 +1,12 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:grocery_store/model/fruit_model.dart';
+import 'package:grocery_store/providers/fruit_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomePage extends StatelessWidget {
@@ -35,11 +40,13 @@ class HomePage extends StatelessWidget {
   PageController _controller = PageController();
   @override
   Widget build(BuildContext context) {
+    List<FruitModel> fruits = context.watch<FruitProvider>().fruitList;
     return DefaultTabController(
       length: cates.length,
       child: Scaffold(
         body: SafeArea(
           child: ListView(
+            scrollDirection: Axis.vertical,
             children: [
               Container(
                 decoration: BoxDecoration(
@@ -106,13 +113,22 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               //Categories
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 17, vertical: 5),
-                child: Text(
-                  "Categories",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 17),
+                    child: Text(
+                      "Categories",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.arrow_forward_ios),
+                  ),
+                ],
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 17),
@@ -129,13 +145,12 @@ class HomePage extends StatelessWidget {
                         children: [
                           Tab(
                             height: 70,
-                            child: IconButton.filled(
-                              style: IconButton.styleFrom(
-                                fixedSize: Size(65, 65),
-                                backgroundColor: colors[i],
-                              ),
-                              onPressed: () {},
-                              icon: Image.asset(
+                            child: Container(
+                              height: 65,
+                              decoration: BoxDecoration(
+                                  color: colors[i], shape: BoxShape.circle),
+                              padding: EdgeInsets.all(15),
+                              child: Image.asset(
                                 cates[i][1],
                                 height: 35,
                                 fit: BoxFit.cover,
@@ -145,10 +160,52 @@ class HomePage extends StatelessWidget {
                           SizedBox(
                             height: 10,
                           ),
-                          Text(cates[i][0])
+                          Text(cates[i][0]),
                         ],
                       ),
                   ],
+                ),
+              ),
+              //features product
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 17),
+                    child: Text(
+                      "Features Product",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.arrow_forward_ios),
+                  ),
+                ],
+              ),
+
+              //Grid view
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(horizontal: 9),
+                child: GridView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: fruits.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.all(8),
+                      color: Colors.amber,
+                      child: Column(
+                        children: [
+                          Image.asset(fruits[index].image),
+                        ],
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
