@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        theme: ThemeData(backgroundColor: Color(0xFFF4F5F9)),
         debugShowCheckedModeBanner: false,
         home: IntroPage(),
       ),

@@ -44,6 +44,7 @@ class HomePage extends StatelessWidget {
     return DefaultTabController(
       length: cates.length,
       child: Scaffold(
+        backgroundColor: Color(0xFFF4F5F9),
         body: SafeArea(
           child: ListView(
             scrollDirection: Axis.vertical,
@@ -130,7 +131,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              Padding(
+              Container(
                 padding: const EdgeInsets.only(left: 17),
                 child: TabBar(
                   indicatorColor: Colors.transparent,
@@ -198,10 +199,68 @@ class HomePage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Container(
                       margin: EdgeInsets.all(8),
-                      color: Colors.amber,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFFFFFFF),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       child: Column(
                         children: [
-                          Image.asset(fruits[index].image),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(right: 10, top: 10),
+                                child: Icon(Icons.favorite_border),
+                              ),
+                            ],
+                          ),
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Container(
+                                height: 100,
+                                width: 100,
+                              ),
+                              Positioned(
+                                top: 0,
+                                child: Container(
+                                  height: 80,
+                                  width: 80,
+                                  alignment: Alignment.bottomCenter,
+                                  decoration: BoxDecoration(
+                                    color: fruits[index].color,
+                                    // borderRadius: BorderRadius.circular(50),
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                bottom: 5,
+                                left: 5,
+                                child: Image.asset(
+                                  fruits[index].image,
+                                  height: 70,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            "\$" + fruits[index].price.toStringAsFixed(2),
+                            style: TextStyle(
+                              color: Color(0xFF6CC51D),
+                            ),
+                          ),
+                          Text(
+                            fruits[index].name,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            fruits[index].weight,
+                          )
                         ],
                       ),
                     );
