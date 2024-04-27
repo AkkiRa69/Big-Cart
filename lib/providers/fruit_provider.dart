@@ -65,7 +65,19 @@ class FruitProvider extends ChangeNotifier {
       description:
           "Organic Mountain works as a seller for many organic growers of organic lemons. Organic lemons are easy to spot in your produce aisle. They are just like regular lemons, but they will usually have a few more scars on the outside of the lemon skin. Organic lemons are considered to be the world's finest lemon for juicing more",
     ),
+    FruitModel(
+      name: "Organic Lemons",
+      price: 2.22,
+      weight: "dozen",
+      qty: 0,
+      color: Color(0xFFF2FFE6),
+      image: "assets/fruits/lime.png",
+      description:
+          "Organic Mountain works as a seller for many organic growers of organic lemons. Organic lemons are easy to spot in your produce aisle. They are just like regular lemons, but they will usually have a few more scars on the outside of the lemon skin. Organic lemons are considered to be the world's finest lemon for juicing more",
+    ),
   ];
 
   List<FruitModel> get fruitList => _fruits;
+
+  // FruitModel fruit = FruitModel();
 }
