@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:grocery_store/components/intro_image.dart';
-import 'package:grocery_store/pages/home_page.dart';
+import 'package:grocery_store/pages/welcome_page.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -15,9 +15,9 @@ class IntroPage extends StatefulWidget {
 
 class _IntroPageState extends State<IntroPage> {
   final List<String> images = [
-    "Online_Groceries_cuate.png",
-    "Delivery_cuate.png",
-    "Passionate_cuate.png"
+    "Online Groceries-cuate.png",
+    "Delivery-cuate.png",
+    "Passionate-cuate.png"
   ];
 
   List title = [
@@ -84,7 +84,7 @@ class _IntroPageState extends State<IntroPage> {
                       Navigator.push(
                           context,
                           PageTransition(
-                              child: HomePage(),
+                              child: WelcomePage(),
                               type: PageTransitionType.bottomToTop));
                     },
                     child: Text(
@@ -113,7 +113,7 @@ class _IntroPageState extends State<IntroPage> {
                         Navigator.push(
                             context,
                             PageTransition(
-                                child: HomePage(),
+                                child: WelcomePage(),
                                 type: PageTransitionType.rightToLeft));
                       }
                     },

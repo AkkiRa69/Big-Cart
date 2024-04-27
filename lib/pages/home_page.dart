@@ -1,29 +1,28 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_store/model/fruit_model.dart';
 import 'package:grocery_store/providers/fruit_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatelessWidget {
   HomePage({super.key});
 
   final List<String> posters = [
     "poster1.jpg",
-    // "poster2.jpg",
     "poster3.jpg",
     "poster4.jpg",
   ];
 
   final List cates = [
-    ["Vegetables", "assets/icons/vegetables1.png"],
-    ["Fruits", "assets/icons/fruits.png"],
-    ["Beverages", "assets/icons/beverage.png"],
-    ["Grocery", "assets/icons/grocery.png"],
-    ["Edible Oil", "assets/icons/edible_oil.png"],
-    ["Household", "assets/icons/vacuum1.png"],
+    ["Vegetables", "assets/icons/Vegetables.png"],
+    ["Fruits", "assets/icons/Fruits.png"],
+    ["Beverages", "assets/icons/Beverages.png"],
+    ["Grocery", "assets/icons/Grocery.png"],
+    ["Edible Oil", "assets/icons/Edible_oil.png"],
+    ["Household", "assets/icons/Household.png"],
   ];
 
   final List<Color> colors = [

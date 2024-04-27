@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_store/pages/intro_page.dart';
+import 'package:grocery_store/pages/home_page.dart';
 import 'package:grocery_store/providers/fruit_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData(backgroundColor: Color(0xFFF4F5F9)),
         debugShowCheckedModeBanner: false,
-        home: IntroPage(),
+        home: HomePage(),
       ),
     );
   }
