@@ -1,10 +1,12 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, prefer_interpolation_to_compose_strings
+
 import 'package:flutter/material.dart';
 import 'package:grocery_store/model/fruit_model.dart';
 
-class FeaturesProduct extends StatelessWidget {
+class Product extends StatelessWidget {
   final FruitModel fruits;
   final void Function()? onTap;
-  const FeaturesProduct({super.key, required this.fruits,required this.onTap});
+  const Product({super.key, required this.fruits, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

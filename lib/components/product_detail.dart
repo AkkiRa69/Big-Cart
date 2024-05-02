@@ -3,6 +3,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_store/model/fruit_model.dart';
+import 'package:grocery_store/providers/fruit_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetail extends StatelessWidget {
   final FruitModel fruit;
@@ -167,7 +169,10 @@ class ProductDetail extends StatelessWidget {
                   ),
                   padding: EdgeInsets.all(18),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  context.read<FruitProvider>().addProductToCart(fruit);
+                  
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

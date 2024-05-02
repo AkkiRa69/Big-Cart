@@ -1,8 +1,10 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:grocery_store/components/fearues_product.dart';
+import 'package:grocery_store/components/my_bottom_nav_bar.dart';
 import 'package:grocery_store/model/fruit_model.dart';
+import 'package:grocery_store/pages/category_page.dart';
 import 'package:grocery_store/pages/product_detail_page.dart';
 import 'package:grocery_store/providers/fruit_provider.dart';
 import 'package:grocery_store/widgets/banner.dart';
@@ -12,9 +14,14 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final List cates = [
     ["Vegetables", "assets/icons/Vegetables.png"],
     ["Fruits", "assets/icons/Fruits.png"],
@@ -22,6 +29,17 @@ class HomePage extends StatelessWidget {
     ["Grocery", "assets/icons/Grocery.png"],
     ["Edible Oil", "assets/icons/Edible_oil.png"],
     ["Household", "assets/icons/Household.png"],
+    ["Babycare", "assets/icons/baby.png"],
+  ];
+
+  final List<Color> colors = [
+    Color(0xFFE6F2EA),
+    Color(0xFFFFE9E5),
+    Color(0xFFFFF6E3),
+    Color(0xFFF3EFFA),
+    Color(0xFFDCF4F5),
+    Color(0xFFFFE8F2),
+    Color(0xFFD2EFFF),
   ];
 
   void navigateToProductDetail(BuildContext context, FruitModel fruits) {
@@ -33,6 +51,13 @@ class HomePage extends StatelessWidget {
           ),
           type: PageTransitionType.rightToLeft),
     );
+  }
+
+  int index = 0;
+  void changeIndex(int value) {
+    setState(() {
+      index = value;
+    });
   }
 
   @override
@@ -58,13 +83,13 @@ class HomePage extends StatelessWidget {
               children: [
                 //search bar
                 MySearchBar(),
-                
+
                 //banner
                 Padding(
                   padding: const EdgeInsets.only(top: 15),
                   child: MyBanner(),
                 ),
-                
+
                 //Categories
                 Padding(
                   padding: const EdgeInsets.only(left: 17, top: 8),
@@ -77,13 +102,27 @@ class HomePage extends StatelessWidget {
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              PageTransition(
+                                  child: CategoryPage(
+                                    fruits: fruits,
+                                    cates: cates,
+                                    colors: colors,
+                                  ),
+                                  type: PageTransitionType.bottomToTop));
+                        },
                         icon: Icon(Icons.arrow_forward_ios),
                       ),
                     ],
                   ),
                 ),
-                Categories(cates: cates),
+                Categories(
+                  cates: cates,
+                  colors: colors,
+                  fruits: fruits,
+                ),
 
                 //features product
                 Padding(
@@ -116,7 +155,7 @@ class HomePage extends StatelessWidget {
                         crossAxisCount: 2,
                         childAspectRatio: 1 / 1.45),
                     itemBuilder: (context, index) {
-                      return FeaturesProduct(
+                      return Product(
                         fruits: fruits[index],
                         onTap: () {
                           navigateToProductDetail(context, fruits[index]);
@@ -128,6 +167,12 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
+        ),
+        bottomNavigationBar: MyBottomNavBar(
+          index: index,
+          onTap: (value) {
+            changeIndex(value);
+          },
         ),
       ),
     );
