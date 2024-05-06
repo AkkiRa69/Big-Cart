@@ -3,15 +3,30 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_store/model/fruit_model.dart';
 
-class Product extends StatelessWidget {
+class Product extends StatefulWidget {
   final FruitModel fruits;
+  final bool isFav;
+  final void Function()? onPressed;
   final void Function()? onTap;
-  const Product({super.key, required this.fruits, required this.onTap});
+  const Product({
+    super.key,
+    required this.fruits,
+    required this.onTap,
+    required this.onPressed,
+    this.isFav = false,
+  });
 
+  @override
+  State<Product> createState() => _ProductState();
+}
+
+
+class _ProductState extends State<Product> {
+  
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: widget.onTap,
       child: Container(
         decoration: BoxDecoration(
           color: Color(0xFFFFFFFF),
@@ -22,9 +37,11 @@ class Product extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10, top: 10),
-                  child: Icon(Icons.favorite_border),
+                IconButton(
+                  onPressed: widget.onPressed,
+                  icon: widget.isFav
+                      ? Icon(Icons.favorite, color: Colors.pink)
+                      : Icon(Icons.favorite_border),
                 ),
               ],
             ),
@@ -42,7 +59,7 @@ class Product extends StatelessWidget {
                     width: 80,
                     alignment: Alignment.bottomCenter,
                     decoration: BoxDecoration(
-                      color: fruits.color,
+                      color: widget.fruits.color,
                       // borderRadius: BorderRadius.circular(50),
                       shape: BoxShape.circle,
                     ),
@@ -52,27 +69,27 @@ class Product extends StatelessWidget {
                   bottom: 5,
                   // left: 5,
                   child: Image.asset(
-                    fruits.image,
+                    widget.fruits.image,
                     height: 80,
                   ),
                 ),
               ],
             ),
             Text(
-              "\$" + fruits.price.toStringAsFixed(2),
+              "\$" + widget.fruits.price.toStringAsFixed(2),
               style: TextStyle(
                 color: Color(0xFF6CC51D),
               ),
             ),
             Text(
-              fruits.name,
+              widget.fruits.name,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
-              fruits.weight,
+              widget.fruits.weight,
               style: TextStyle(color: Colors.grey),
             ),
             SizedBox(height: 5),

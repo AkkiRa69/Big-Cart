@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:grocery_store/components/fearues_product.dart';
+import 'package:grocery_store/components/features_product.dart';
 import 'package:grocery_store/model/fruit_model.dart';
 import 'package:grocery_store/pages/product_detail_page.dart';
 import 'package:page_transition/page_transition.dart';
@@ -54,6 +54,7 @@ class ProductPage extends StatelessWidget {
               childAspectRatio: 1 / 1.45),
           itemBuilder: (context, index) {
             return Product(
+              onPressed: (){},
               fruits: fruits[index],
               onTap: () {
                 navigateToProductDetail(context, fruits[index]);

@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:grocery_store/components/liner_button.dart';
-import 'package:grocery_store/pages/home_page.dart';
+import 'package:grocery_store/pages/controller_page.dart';
 import 'package:grocery_store/pages/track_order_page.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -22,7 +22,8 @@ class OrderSuccessPage extends StatelessWidget {
               Navigator.push(
                   context,
                   PageTransition(
-                      child: HomePage(), type: PageTransitionType.leftToRight));
+                      child: ControllerPage(),
+                      type: PageTransitionType.leftToRight));
             },
             icon: Icon(Icons.arrow_back)),
       ),
@@ -82,6 +83,7 @@ class OrderSuccessPage extends StatelessWidget {
                   child: LinearButton(
                       text: "Track order",
                       onPressed: () {
+                       
                         Navigator.push(
                             context,
                             PageTransition(

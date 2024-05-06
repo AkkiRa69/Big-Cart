@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_store/pages/home_page.dart';
+import 'package:get/get.dart';
+import 'package:grocery_store/pages/controller_page.dart';
 import 'package:grocery_store/providers/fruit_provider.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initPathProvider();
   runApp(const MyApp());
+}
+
+Future<void> initPathProvider() async {
+  await getApplicationDocumentsDirectory(); // Initialize path_provider
 }
 
 class MyApp extends StatelessWidget {
@@ -18,10 +26,10 @@ class MyApp extends StatelessWidget {
           create: (context) => FruitProvider(),
         ),
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         theme: ThemeData(backgroundColor: Color(0xFFF4F5F9)),
         debugShowCheckedModeBanner: false,
-        home: HomePage(),
+        home: ControllerPage(),
       ),
     );
   }

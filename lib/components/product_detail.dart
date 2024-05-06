@@ -3,7 +3,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_store/model/fruit_model.dart';
+import 'package:grocery_store/pages/shopping_cart_page.dart';
 import 'package:grocery_store/providers/fruit_provider.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetail extends StatelessWidget {
@@ -170,8 +172,13 @@ class ProductDetail extends StatelessWidget {
                   padding: EdgeInsets.all(18),
                 ),
                 onPressed: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          duration: Duration(milliseconds: 300),
+                          child: ShoppingCartPage(),
+                          type: PageTransitionType.rightToLeft));
                   context.read<FruitProvider>().addProductToCart(fruit);
-                  
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

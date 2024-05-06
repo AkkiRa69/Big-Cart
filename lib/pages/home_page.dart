@@ -1,27 +1,27 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:grocery_store/components/fearues_product.dart';
-import 'package:grocery_store/components/my_bottom_nav_bar.dart';
+import 'package:grocery_store/components/banner.dart';
+import 'package:grocery_store/components/categories.dart';
+import 'package:grocery_store/components/features_product.dart';
+import 'package:grocery_store/components/search_bar.dart';
 import 'package:grocery_store/model/fruit_model.dart';
 import 'package:grocery_store/pages/category_page.dart';
 import 'package:grocery_store/pages/product_detail_page.dart';
 import 'package:grocery_store/providers/fruit_provider.dart';
-import 'package:grocery_store/widgets/banner.dart';
-import 'package:grocery_store/widgets/categories.dart';
-import 'package:grocery_store/widgets/search_bar.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
   final List cates = [
     ["Vegetables", "assets/icons/Vegetables.png"],
     ["Fruits", "assets/icons/Fruits.png"],
@@ -53,15 +53,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  int index = 0;
-  void changeIndex(int value) {
-    setState(() {
-      index = value;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     List<FruitModel> fruits = context.watch<FruitProvider>().fruitList;
     return DefaultTabController(
       length: cates.length,
@@ -153,9 +147,23 @@ class _HomePageState extends State<HomePage> {
                         crossAxisSpacing: 17,
                         mainAxisSpacing: 17,
                         crossAxisCount: 2,
-                        childAspectRatio: 1 / 1.45),
+                        childAspectRatio: 1 / 1.5),
                     itemBuilder: (context, index) {
                       return Product(
+                        onPressed: () {
+                          context
+                              .read<FruitProvider>()
+                              .addProductToFavorites(fruits[index]);
+                          setState(() {
+                            fruits[index].isFav = !fruits[index].isFav;
+                            if (fruits[index].isFav == false) {
+                              context
+                                  .read<FruitProvider>()
+                                  .removeProductFavorite(fruits[index]);
+                            }
+                          });
+                        },
+                        isFav: fruits[index].isFav,
                         fruits: fruits[index],
                         onTap: () {
                           navigateToProductDetail(context, fruits[index]);
@@ -168,13 +176,10 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-        bottomNavigationBar: MyBottomNavBar(
-          index: index,
-          onTap: (value) {
-            changeIndex(value);
-          },
-        ),
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

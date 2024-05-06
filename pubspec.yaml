@@ -40,7 +40,11 @@ dependencies:
   provider: ^6.1.2
   get: ^4.6.6
   timeline_tile: ^2.0.0
-  intl: ^0.19.0
+  google_nav_bar: ^5.0.6
+  curved_navigation_bar: ^1.0.3
+  awesome_snackbar_content: ^0.1.3
+  audioplayers: ^4.0.0
+  path_provider: ^2.1.3
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +73,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/fruits/
+    - assets/audios/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

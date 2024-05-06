@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:grocery_store/components/app_bar.dart';
+import 'package:grocery_store/components/liner_button.dart';
 import 'package:grocery_store/pages/login_page.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -127,37 +128,7 @@ class SignUpPage extends StatelessWidget {
                           ),
                         ),
                         //login button
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            gradient: LinearGradient(
-                              begin: Alignment.centerLeft,
-                              end: Alignment.centerRight,
-                              colors: [
-                                // Colors.white,
-                                Color.fromARGB(255, 190, 249, 192),
-                                Color.fromARGB(255, 136, 241, 140),
-                                const Color.fromARGB(255, 95, 236, 100),
-                              ],
-                            ),
-                          ),
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              padding: EdgeInsets.all(18),
-                              // backgroundColor: Colors.transparent,
-                            ),
-                            onPressed: () {},
-                            child: Text(
-                              "Signup",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 16),
-                            ),
-                          ),
-                        ),
+                        LinearButton(text: "Signup", onPressed: (){})
                       ],
                     ),
                   ),

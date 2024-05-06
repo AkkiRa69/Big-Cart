@@ -117,4 +117,20 @@ class FruitProvider extends ChangeNotifier {
     for (int i = 0; i < cart.length; i++) total += cart[i].price * cart[i].qty;
     return total;
   }
+
+  List<FruitModel> _favList = [];
+
+  List<FruitModel> get favList => _favList;
+
+  void addProductToFavorites(FruitModel fruit) {
+   if (!_favList.contains(fruit)) {
+      _favList.add(fruit);
+      notifyListeners();
+    }
+  }
+
+  void removeProductFavorite(FruitModel fruit) {
+    _favList.remove(fruit);
+    notifyListeners();
+  }
 }

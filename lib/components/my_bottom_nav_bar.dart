@@ -1,6 +1,8 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_key_in_widget_constructors, prefer_const_constructors_in_immutables, unnecessary_import
+
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:grocery_store/pages/shopping_cart_page.dart';
-import 'package:page_transition/page_transition.dart';
 
 class MyBottomNavBar extends StatelessWidget {
   final int index;
@@ -10,45 +12,30 @@ class MyBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      onTap: onTap,
-      backgroundColor: Color(0xFFFFFFFF),
-      currentIndex: index,
-      unselectedItemColor: Color(0xFF868889),
-      selectedItemColor: Color(0xFF040404),
-      iconSize: 25,
+    return CurvedNavigationBar(
+      animationDuration: Duration(milliseconds: 300),
+      backgroundColor: Colors.transparent,
+      onTap: (value) {
+        onTap(value);
+      },
+      height: 60,
+      buttonBackgroundColor: Color(0xff6CC51D),
       items: [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_filled),
-          label: "",
+        Icon(
+          Icons.home_filled,
+          color: index == 0 ? Colors.white : Colors.black,
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: "",
+        Icon(
+          Icons.person,
+          color: index == 1 ? Colors.white : Colors.black,
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.favorite_border),
-          label: "",
+        Icon(
+          Icons.favorite,
+          color: index == 2 ? Colors.white : Colors.black,
         ),
-        BottomNavigationBarItem(
-          icon: Container(
-            width: 50,
-            height: 35,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-            ),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    PageTransition(
-                        child: ShoppingCartPage(),
-                        type: PageTransitionType.bottomToTop));
-              },
-              child: Icon(Icons.shopping_bag_outlined),
-            ),
-          ),
-          label: "",
+        Icon(
+          Icons.shopping_bag_outlined,
+          color: index == 3 ? Colors.white : Colors.black,
         ),
       ],
     );

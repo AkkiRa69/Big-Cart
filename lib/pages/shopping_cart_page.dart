@@ -2,16 +2,18 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:grocery_store/components/dimissible_tile.dart';
 import 'package:grocery_store/model/fruit_model.dart';
-import 'package:grocery_store/pages/home_page.dart';
+import 'package:grocery_store/pages/controller_page.dart';
 import 'package:grocery_store/pages/shipping_method_page.dart';
 import 'package:grocery_store/providers/fruit_provider.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 class ShoppingCartPage extends StatefulWidget {
-  const ShoppingCartPage({super.key});
-
+  const ShoppingCartPage({
+    super.key,
+  });
   @override
   State<ShoppingCartPage> createState() => _ShoppingCartPageState();
 }
@@ -29,7 +31,8 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
             Navigator.push(
                 context,
                 PageTransition(
-                    child: HomePage(), type: PageTransitionType.leftToRight));
+                    child: ControllerPage(),
+                    type: PageTransitionType.leftToRight));
           },
           icon: Icon(Icons.arrow_back),
         ),
@@ -44,145 +47,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
               child: ListView.builder(
                 itemCount: fruits.length,
                 itemBuilder: (context, index) {
-                  return Dismissible(
-                    secondaryBackground: _buildDismissibleRightToLeft(),
-                    background: _buildDismissibleLeftToRight(),
-                    onDismissed: (DismissDirection direction) {
-                      setState(() {
-                        context
-                            .read<FruitProvider>()
-                            .removeProductFromCart(fruits[index]);
-                      });
-                    },
-                    key: UniqueKey(),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Color(0xFFFFFFFF),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      margin: EdgeInsets.symmetric(horizontal: 17, vertical: 6),
-                      padding: EdgeInsets.all(10),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          //images + detail
-                          Row(
-                            children: [
-                              Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  Container(
-                                    height: 90,
-                                    width: 90,
-                                  ),
-                                  Positioned(
-                                    top: 0,
-                                    child: Container(
-                                      height: 70,
-                                      width: 70,
-                                      alignment: Alignment.bottomCenter,
-                                      decoration: BoxDecoration(
-                                        color: fruits[index].color,
-                                        // borderRadius: BorderRadius.circular(50),
-                                        shape: BoxShape.circle,
-                                      ),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    bottom: 5,
-                                    // left: 5,
-                                    child: Image.asset(
-                                      fruits[index].image,
-                                      height: 70,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                width: 15,
-                              ),
-                              Container(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "\$" +
-                                          fruits[index]
-                                              .price
-                                              .toStringAsFixed(2),
-                                      style: TextStyle(
-                                        color: Color(0xFF6CC51D),
-                                      ),
-                                    ),
-                                    Text(
-                                      fruits[index].name,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      fruits[index].weight,
-                                      style: TextStyle(
-                                        color: Colors.grey[500],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    fruits[index].qty++;
-                                  });
-                                },
-                                child: Icon(
-                                  color: Colors.green,
-                                  CupertinoIcons.add,
-                                  size: 20,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Container(
-                                alignment: Alignment.center,
-                                width: 50,
-                                child: Text(
-                                  (fruits[index].qty).toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    if (fruits[index].qty <= 0) {
-                                      return;
-                                    }
-                                    fruits[index].qty--;
-                                  });
-                                },
-                                child: Icon(
-                                  color: Colors.green,
-                                  CupertinoIcons.minus,
-                                  size: 20,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
+                  return DimissibleTile(fruit: fruits[index]);
                 },
               ),
             ),
@@ -308,38 +173,4 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
       ),
     );
   }
-}
-
-Widget _buildDismissibleRightToLeft() {
-  return Container(
-    alignment: Alignment.centerRight,
-    padding: EdgeInsets.only(right: 30),
-    margin: EdgeInsets.symmetric(vertical: 6, horizontal: 17),
-    decoration: BoxDecoration(
-      color: Colors.red,
-      borderRadius: BorderRadius.circular(8),
-    ),
-    child: Icon(
-      Icons.delete,
-      size: 40,
-      color: Colors.white,
-    ),
-  );
-}
-
-Widget _buildDismissibleLeftToRight() {
-  return Container(
-    alignment: Alignment.centerLeft,
-    padding: EdgeInsets.only(left: 30),
-    margin: EdgeInsets.symmetric(vertical: 6, horizontal: 17),
-    decoration: BoxDecoration(
-      color: Colors.red,
-      borderRadius: BorderRadius.circular(8),
-    ),
-    child: Icon(
-      Icons.delete,
-      size: 40,
-      color: Colors.white,
-    ),
-  );
 }
