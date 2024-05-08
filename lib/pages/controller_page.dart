@@ -7,7 +7,9 @@ import 'package:grocery_store/pages/shopping_cart_page.dart';
 
 // ignore: must_be_immutable
 class ControllerPage extends StatefulWidget {
-  ControllerPage({super.key});
+  ControllerPage({
+    super.key,
+  });
 
   @override
   State<ControllerPage> createState() => _ControllerPageState();
@@ -21,8 +23,7 @@ class _ControllerPageState extends State<ControllerPage> {
     ShoppingCartPage(),
   ];
 
-  int index = 0;
-
+  late int index = 0;
   void changeIndex(int value) {
     setState(() {
       index = value;

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_store/components/app_bar.dart';
 import 'package:grocery_store/components/liner_button.dart';
+import 'package:grocery_store/pages/controller_page.dart';
 import 'package:grocery_store/pages/home_page.dart';
 import 'package:grocery_store/pages/signup_page.dart';
 import 'package:grocery_store/pages/welcome_page.dart';
@@ -94,6 +95,7 @@ class LoginPage extends StatelessWidget {
                             ),
                           ),
                         ),
+
                         //password text field
                         Container(
                           decoration: BoxDecoration(
@@ -156,7 +158,21 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                         //login button
-                        LinearButton(text: "Login", onPressed: () {}),
+                        Row(
+                          children: [
+                            Expanded(
+                                child: LinearButton(
+                                    text: "Login",
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          PageTransition(
+                                              child: ControllerPage(),
+                                              type: PageTransitionType
+                                                  .leftToRight));
+                                    })),
+                          ],
+                        ),
                       ],
                     ),
                   ),

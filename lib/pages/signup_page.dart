@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_store/components/app_bar.dart';
 import 'package:grocery_store/components/liner_button.dart';
+import 'package:grocery_store/pages/controller_page.dart';
 import 'package:grocery_store/pages/login_page.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -128,7 +129,21 @@ class SignUpPage extends StatelessWidget {
                           ),
                         ),
                         //login button
-                        LinearButton(text: "Signup", onPressed: (){})
+                        Row(
+                          children: [
+                            Expanded(
+                                child: LinearButton(
+                                    text: "Signup",
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          PageTransition(
+                                              child: ControllerPage(),
+                                              type: PageTransitionType
+                                                  .leftToRight));
+                                    })),
+                          ],
+                        )
                       ],
                     ),
                   ),

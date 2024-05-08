@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grocery_store/pages/controller_page.dart';
+import 'package:grocery_store/providers/address_provider.dart';
+import 'package:grocery_store/providers/card_provider.dart';
 import 'package:grocery_store/providers/fruit_provider.dart';
+import 'package:grocery_store/providers/order_provider.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -24,6 +27,15 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => FruitProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => OrderProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AddressProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CardProvider(),
         ),
       ],
       child: GetMaterialApp(

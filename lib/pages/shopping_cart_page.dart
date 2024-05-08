@@ -1,12 +1,14 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, prefer_interpolation_to_compose_strings, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_store/components/dimissible_tile.dart';
+import 'package:grocery_store/components/liner_button.dart';
 import 'package:grocery_store/model/fruit_model.dart';
+import 'package:grocery_store/model/order_model.dart';
 import 'package:grocery_store/pages/controller_page.dart';
 import 'package:grocery_store/pages/shipping_method_page.dart';
 import 'package:grocery_store/providers/fruit_provider.dart';
+import 'package:grocery_store/providers/order_provider.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +25,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
   Widget build(BuildContext context) {
     List<FruitModel> fruits = context.watch<FruitProvider>().shoppingCart;
     double total = context.watch<FruitProvider>().totalPrice(fruits);
+    int orderNo = context.watch<OrderProvider>().orderNo;
     return Scaffold(
       backgroundColor: Color(0xFFF4F5F9),
       appBar: AppBar(
@@ -47,7 +50,22 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
               child: ListView.builder(
                 itemCount: fruits.length,
                 itemBuilder: (context, index) {
-                  return DimissibleTile(fruit: fruits[index]);
+                  return DimissibleTile(
+                    fruit: fruits[index],
+                    increment: () {
+                      setState(() {
+                        fruits[index].qty++;
+                      });
+                    },
+                    decrement: () {
+                      setState(() {
+                        if (fruits[index].qty <= 0) {
+                          return;
+                        }
+                        fruits[index].qty--;
+                      });
+                    },
+                  );
                 },
               ),
             ),
@@ -131,40 +149,33 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                   height: 5,
                 ),
                 //button checkout
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [
-                        // Colors.white,
-                        Color.fromARGB(255, 190, 249, 192),
-                        Color.fromARGB(255, 136, 241, 140),
-                        const Color.fromARGB(255, 95, 236, 100),
-                      ],
+                Row(
+                  children: [
+                    Expanded(
+                      child: LinearButton(
+                          text: "Checkout",
+                          onPressed: () {
+                            context.read<OrderProvider>().setOrderNo();
+                            OrderModel orderModel = OrderModel(
+                              date: DateTime.now(),
+                              orderNo:
+                                  orderNo, // Increment orderNo after assigning it
+                              itemCount: fruits.length,
+                              itemPrice: total,
+                            );
+                            context
+                                .read<OrderProvider>()
+                                .addOrderToList(orderModel);
+                            Navigator.push(
+                              context,
+                              PageTransition(
+                                child: ShoppingMethodPage(),
+                                type: PageTransitionType.rightToLeft,
+                              ),
+                            );
+                          }),
                     ),
-                  ),
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      padding: EdgeInsets.all(18),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          PageTransition(
-                              child: ShoppingMethodPage(),
-                              type: PageTransitionType.rightToLeft));
-                    },
-                    child: Text(
-                      "Checkout",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ),
+                  ],
                 ),
               ],
             ),

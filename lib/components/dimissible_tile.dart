@@ -7,7 +7,13 @@ import 'package:provider/provider.dart';
 class DimissibleTile extends StatefulWidget {
   final bool isFav;
   final FruitModel fruit;
-  const DimissibleTile({super.key, this.isFav = false, required this.fruit});
+  final Function() increment, decrement;
+  const DimissibleTile(
+      {super.key,
+      this.isFav = false,
+      required this.fruit,
+      required this.increment,
+      required this.decrement});
 
   @override
   State<DimissibleTile> createState() => _DimissibleTileState();
@@ -111,9 +117,7 @@ class _DimissibleTileState extends State<DimissibleTile> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    setState(() {
-                      widget.fruit.qty++;
-                    });
+                    widget.increment();
                   },
                   child: Icon(
                     color: Colors.green,
@@ -134,12 +138,7 @@ class _DimissibleTileState extends State<DimissibleTile> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    setState(() {
-                      if (widget.fruit.qty <= 0) {
-                        return;
-                      }
-                      widget.fruit.qty--;
-                    });
+                    widget.decrement();
                   },
                   child: Icon(
                     color: Colors.green,

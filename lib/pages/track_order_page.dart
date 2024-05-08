@@ -4,13 +4,13 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grocery_store/components/timeline_tile.dart';
-import 'package:grocery_store/model/fruit_model.dart';
-import 'package:grocery_store/providers/fruit_provider.dart';
+import 'package:grocery_store/model/order_model.dart';
+import 'package:grocery_store/providers/order_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
 class TrackOrderPage extends StatefulWidget {
-  TrackOrderPage({super.key});
+  const TrackOrderPage({super.key});
 
   @override
   State<TrackOrderPage> createState() => _TrackOrderPageState();
@@ -85,8 +85,6 @@ class _TrackOrderPageState extends State<TrackOrderPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<FruitModel> fruits = context.watch<FruitProvider>().shoppingCart;
-    double totalPrice = context.watch<FruitProvider>().totalPrice(fruits);
     return Scaffold(
       backgroundColor: Color(0xFFF4F5F9),
       appBar: AppBar(
@@ -94,12 +92,12 @@ class _TrackOrderPageState extends State<TrackOrderPage> {
         title: Text("Track Order"),
         centerTitle: true,
       ),
-      body: _buildBody(context, fruits, totalPrice),
+      body: _buildBody(context),
     );
   }
 
-  Widget _buildBody(
-      BuildContext context, List<FruitModel> fruits, double total) {
+  Widget _buildBody(BuildContext context) {
+    List<OrderModel> orders = context.read<OrderProvider>().orderList;
     return Container(
       child: ListView(
         children: [
@@ -133,20 +131,20 @@ class _TrackOrderPageState extends State<TrackOrderPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      "Order #${9087}",
+                      "Order #${orders[orders.length - 1].orderNo}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
                     ),
                     Text(
-                      "Placed on ${DateFormat('MMMM dd yyyy').format(DateTime.now())}",
+                      "Placed on ${DateFormat('MMMM dd yyyy').format(orders[0].date)}",
                       style: TextStyle(color: Color(0xFF868889)),
                     ),
                     Row(
                       children: [
                         Text(
-                          "Items: ${fruits.length}",
+                          "Items: ${orders[orders.length - 1].itemCount}",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
@@ -155,7 +153,7 @@ class _TrackOrderPageState extends State<TrackOrderPage> {
                           width: 10,
                         ),
                         Text(
-                          "Items: ${"\$" + (total + 1.6).toStringAsFixed(2)}",
+                          "Items: ${"\$" + (orders[orders.length - 1].itemPrice + 1.6).toStringAsFixed(2)}",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),

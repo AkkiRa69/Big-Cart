@@ -7,7 +7,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 class FavoritePage extends StatefulWidget {
-  const FavoritePage({super.key});
+  const FavoritePage({super.key, });
 
   @override
   State<FavoritePage> createState() => _FavoritePageState();
@@ -28,11 +28,14 @@ class _FavoritePageState extends State<FavoritePage> {
     return AppBar(
       leading: IconButton(
         onPressed: () {
-          Navigator.push(
-              context,
-              PageTransition(
-                  child: ControllerPage(),
-                  type: PageTransitionType.leftToRight));
+            Navigator.push(
+                context,
+                PageTransition(
+                    child: ControllerPage(
+                     
+                    ),
+                    type: PageTransitionType.leftToRight));
+          
         },
         icon: Icon(Icons.arrow_back),
       ),
@@ -52,6 +55,19 @@ class _FavoritePageState extends State<FavoritePage> {
           return DimissibleTile(
             fruit: fruits[index],
             isFav: true,
+            increment: () {
+              setState(() {
+                fruits[index].qty++;
+              });
+            },
+            decrement: () {
+              setState(() {
+                if (fruits[index].qty <= 0) {
+                  return;
+                }
+                fruits[index].qty--;
+              });
+            },
           );
         },
       ),

@@ -6,7 +6,7 @@ class MyTimeLineTile extends StatelessWidget {
   final bool isFirst, isLast, isPast;
 
   final String icon, title, subTitle;
-  MyTimeLineTile({
+  const MyTimeLineTile({
     super.key,
     required this.isFirst,
     required this.isLast,
@@ -26,8 +26,8 @@ class MyTimeLineTile extends StatelessWidget {
         isLast: isLast,
         //decorate line stlye
         beforeLineStyle: LineStyle(
-          color: Color(0xFFEBEBEB),
-          thickness: 2,
+          color: isPast ? Color(0xff28B446) : Color(0xff868889),
+          thickness: 3,
         ),
         //decorate icon stlye
         indicatorStyle: IndicatorStyle(
