@@ -14,8 +14,7 @@ class CartControllerPage extends StatelessWidget {
         subtitle: "You will get a response within a few minutes.",
         title: "Your cart is empty !",
         btnText: 'Start shopping',
-        onPressed: () {
-        }),
+        onPressed: () {}),
   ];
 
   @override
