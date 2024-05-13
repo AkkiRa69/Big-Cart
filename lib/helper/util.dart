@@ -46,17 +46,19 @@ Widget fackeToggle(String text) {
   );
 }
 
-AppBar myAppBar(void Function()? onPressed,String text){
+AppBar myAppBar(void Function()? onPressed, String text) {
   return AppBar(
-      backgroundColor: Color(0xffffffff),
-      centerTitle: true,
-      title: Text(text),
-      actions: [
-        IconButton(
-          onPressed: onPressed,
-          icon: Icon(CupertinoIcons.add_circled),
-          iconSize: 25,
-        ),
-      ],
-    ); 
+    backgroundColor: Color(0xffffffff),
+    centerTitle: true,
+    title: Text(text),
+    actions: [
+      IconButton(
+        onPressed: onPressed,
+        icon: Icon(CupertinoIcons.add_circled),
+        iconSize: 25,
+      ),
+    ],
+  );
 }
+
+

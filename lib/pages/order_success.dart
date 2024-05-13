@@ -2,12 +2,20 @@
 
 import 'package:flutter/material.dart';
 import 'package:grocery_store/components/liner_button.dart';
+import 'package:grocery_store/components/oder_success.dart';
 import 'package:grocery_store/pages/controller_page.dart';
-import 'package:grocery_store/pages/track_order_page.dart';
 import 'package:page_transition/page_transition.dart';
 
 class OrderSuccessPage extends StatelessWidget {
-  const OrderSuccessPage({super.key});
+  final String appBarTitle, title, subtitle, btnText;
+  final void Function()? onPressed;
+  const OrderSuccessPage(
+      {super.key,
+      required this.btnText,
+      required this.onPressed,
+      required this.appBarTitle,
+      required this.subtitle,
+      required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +24,7 @@ class OrderSuccessPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xFFFFFFFF),
         centerTitle: true,
-        title: Text("Order Success"),
+        title: Text(appBarTitle),
         leading: IconButton(
             onPressed: () {
               Navigator.push(
@@ -38,58 +46,19 @@ class OrderSuccessPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 95),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "assets/icons/bag1.png",
-                    height: 150,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: Text(
-                      "Your order was successful!",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    "You will get a response within a few minutes.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.grey[600],
-                      fontSize: 16,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          // Spacer(),
+          OrderSuccess(
+            subTitle: subtitle,
+            title: title,
+          ), // Spacer(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 17),
             child: Row(
               children: [
                 Expanded(
                   child: LinearButton(
-                      text: "Track order",
-                      onPressed: () {
-                       
-                        Navigator.push(
-                            context,
-                            PageTransition(
-                                child: TrackOrderPage(),
-                                type: PageTransitionType.rightToLeft));
-                      }),
+                    text: btnText,
+                    onPressed: onPressed,
+                  ),
                 ),
               ],
             ),

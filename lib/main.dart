@@ -38,8 +38,7 @@ class MyApp extends StatelessWidget {
           create: (context) => CardProvider(),
         ),
       ],
-      child: GetMaterialApp(
-        theme: ThemeData(backgroundColor: Color(0xFFF4F5F9)),
+      child: const GetMaterialApp(
         debugShowCheckedModeBanner: false,
         home: ControllerPage(),
       ),

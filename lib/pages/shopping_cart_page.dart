@@ -163,6 +163,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                               itemCount: fruits.length,
                               itemPrice: total,
                             );
+
                             context
                                 .read<OrderProvider>()
                                 .addOrderToList(orderModel);

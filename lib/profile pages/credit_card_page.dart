@@ -2,13 +2,15 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:grocery_store/components/address_text_field.dart';
-import 'package:grocery_store/components/address_tile.dart';
+import 'package:grocery_store/components/card_tile.dart';
 import 'package:grocery_store/components/liner_button.dart';
+import 'package:grocery_store/constant/card_icon.dart';
 import 'package:grocery_store/helper/util.dart';
-import 'package:grocery_store/model/address_model.dart';
+import 'package:grocery_store/model/card_model.dart';
 import 'package:grocery_store/profile%20pages/add_card_page.dart';
-import 'package:grocery_store/providers/address_provider.dart';
+import 'package:grocery_store/providers/card_provider.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
@@ -40,8 +42,10 @@ class MyCreditCardPage extends StatelessWidget {
   TextEditingController expires = TextEditingController();
   TextEditingController cvv = TextEditingController();
 
+  int currentIndex = 0;
+
   Widget _buildBody(BuildContext context) {
-    List<AddressModel> add = context.watch<AddressProvider>().addressList;
+    List<CardModel> card = context.watch<CardProvider>().cardList;
     return SingleChildScrollView(
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       child: Column(
@@ -74,12 +78,13 @@ class MyCreditCardPage extends StatelessWidget {
                 ),
 
                 //new address
-                AddressTile(
-                  color: Color(0xffF5F5F5),
-                  add: add[add.length - 1],
-                  icon: "assets/icons/master.png",
+                CardTile(
+                  index: card.length - 1,
+                  card: card[card.length - 1],
+                  icon: currentIndex % 2 == 0
+                      ? CardIcons.masterCard
+                      : CardIcons.visaCard,
                 ),
-                //container
                 Divider(
                   color: Color(0xffEBEBEB),
                 ),
@@ -130,39 +135,24 @@ class MyCreditCardPage extends StatelessWidget {
           ),
           ListView.builder(
             shrinkWrap: true,
-            itemCount: add.length,
+            itemCount: card.length,
             physics: NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              if (add.isEmpty) {
-                return Container();
-              }
-              if (index % 2 == 0) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: Color(0xffffffff),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  margin: EdgeInsets.only(left: 17, right: 17, bottom: 10),
-                  child: AddressTile(
-                    color: Color(0xffF5F5F5),
-                    add: add[index],
-                    icon: "assets/icons/master.png",
-                  ),
-                );
-              } else {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: Color(0xffffffff),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  margin: EdgeInsets.only(left: 17, right: 17, bottom: 10),
-                  child: AddressTile(
-                    color: Color(0xffF5F5F5),
-                    add: add[index],
-                    icon: "assets/icons/visa.png",
-                  ),
-                );
-              }
+              currentIndex = index;
+              return Container(
+                decoration: BoxDecoration(
+                  color: Color(0xffffffff),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                margin: EdgeInsets.only(left: 17, right: 17, bottom: 10),
+                child: CardTile(
+                  card: card[index],
+                  icon: index % 2 == 0
+                      ? CardIcons.masterCard
+                      : CardIcons.visaCard,
+                  index: index,
+                ),
+              );
             },
           ),
         ],
@@ -171,10 +161,37 @@ class MyCreditCardPage extends StatelessWidget {
   }
 
   Widget _buildBottomAppBar(BuildContext context) {
+    List<CardModel> card = context.watch<CardProvider>().cardList;
     return BottomAppBar(
       elevation: 0,
       color: Colors.transparent,
-      child: LinearButton(text: "Save settings", onPressed: () {}),
+      child: LinearButton(
+        text: "Save settings",
+        onPressed: () {
+          if (name.text.isEmpty ||
+              cardNum.text.isEmpty ||
+              expires.text.isEmpty ||
+              cvv.text.isEmpty) {
+            return snackBar(context);
+          }
+          CardModel cardModel = CardModel(
+            name: name.text,
+            cardNum: int.parse(cardNum.text),
+            cvv: int.parse(cvv.text),
+            expires: int.parse(expires.text),
+          );
+          name.value = TextEditingValue.empty;
+          cardNum.value = TextEditingValue.empty;
+          cvv.value = TextEditingValue.empty;
+          expires.value = TextEditingValue.empty;
+          Get.snackbar("Message", "Card updated successfully.");
+          context
+              .read<CardProvider>()
+              .removeCardFromList(card[card.length - 1]);
+
+          context.read<CardProvider>().addCardToList(cardModel);
+        },
+      ),
     );
   }
 }

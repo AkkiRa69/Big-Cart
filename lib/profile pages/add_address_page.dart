@@ -15,7 +15,7 @@ class AddAddressPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF4F5F9),
+      backgroundColor: const Color(0xffF4F5F9),
       appBar: _buildAppBar(),
       body: _buildBody(context),
       bottomNavigationBar: _buildBottomAppBar(context),
@@ -25,8 +25,8 @@ class AddAddressPage extends StatelessWidget {
   AppBar _buildAppBar() {
     return AppBar(
       centerTitle: true,
-      backgroundColor: Color(0xffffffff),
-      title: Text("Add Address"),
+      backgroundColor: const Color(0xffffffff),
+      title: const Text("Add Address"),
     );
   }
 
@@ -39,7 +39,7 @@ class AddAddressPage extends StatelessWidget {
 
   Widget _buildBody(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 17, vertical: 25),
+      padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 25),
       child: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
@@ -84,7 +84,7 @@ class AddAddressPage extends StatelessWidget {
   Widget _buildBottomAppBar(BuildContext context) {
     return BottomAppBar(
       elevation: 0,
-      color: Color(0xffF4F5F9),
+      color: const Color(0xffF4F5F9),
       child: LinearButton(
         text: "Add address",
         onPressed: () {
@@ -112,7 +112,7 @@ class AddAddressPage extends StatelessWidget {
           country.value = TextEditingValue.empty;
 
           context.read<AddressProvider>().addAddressToList(add);
-          Get.snackbar("Message", "Adress added successfully.");
+          Get.snackbar("Message", "Address added successfully.");
         },
       ),
     );

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_store/components/my_bottom_nav_bar.dart';
+import 'package:grocery_store/pages/cart_contoller_page.dart';
 import 'package:grocery_store/pages/favorite_page.dart';
 import 'package:grocery_store/pages/home_page.dart';
 import 'package:grocery_store/pages/profile_page.dart';
-import 'package:grocery_store/pages/shopping_cart_page.dart';
 
 // ignore: must_be_immutable
 class ControllerPage extends StatefulWidget {
-  ControllerPage({
+  const ControllerPage({
     super.key,
   });
 
@@ -17,10 +17,10 @@ class ControllerPage extends StatefulWidget {
 
 class _ControllerPageState extends State<ControllerPage> {
   final List<Widget> pages = [
-    HomePage(),
-    ProfilePage(),
-    FavoritePage(),
-    ShoppingCartPage(),
+    const HomePage(),
+    const ProfilePage(),
+    const FavoritePage(),
+     CartControllerPage(),
   ];
 
   late int index = 0;

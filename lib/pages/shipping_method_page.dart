@@ -1,12 +1,18 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_import, avoid_unnecessary_containers
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:grocery_store/components/liner_button.dart';
+import 'package:grocery_store/model/fruit_model.dart';
+import 'package:grocery_store/model/order_model.dart';
 import 'package:grocery_store/pages/order_success.dart';
 import 'package:grocery_store/pages/shopping_cart_page.dart';
+import 'package:grocery_store/pages/track_order_page.dart';
+import 'package:grocery_store/providers/fruit_provider.dart';
+import 'package:grocery_store/providers/order_provider.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
@@ -29,7 +35,20 @@ class _ShoppingMethodPageState extends State<ShoppingMethodPage> {
       Navigator.push(
           context,
           PageTransition(
-              child: OrderSuccessPage(), type: PageTransitionType.rightToLeft));
+              child: OrderSuccessPage(
+                appBarTitle: 'Order Success',
+                subtitle: 'You will get a response within a few minutes',
+                title: "Your order was successful!",
+                btnText: 'Track order',
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: TrackOrderPage(),
+                          type: PageTransitionType.rightToLeft));
+                },
+              ),
+              type: PageTransitionType.rightToLeft));
     }
   }
 
@@ -110,7 +129,7 @@ class _ShoppingMethodPageState extends State<ShoppingMethodPage> {
             style: TextStyle(fontSize: 14),
           ),
           title: Divider(),
-          content: Container(
+          content: SizedBox(
             height: 550,
             child: SingleChildScrollView(
               child: Column(
@@ -137,7 +156,7 @@ class _ShoppingMethodPageState extends State<ShoppingMethodPage> {
         Step(
           label: Text("ADDRESS"),
           title: Divider(),
-          content: Container(
+          content: SizedBox(
             height: 550,
             child: SingleChildScrollView(
               child: Column(
@@ -177,7 +196,7 @@ class _ShoppingMethodPageState extends State<ShoppingMethodPage> {
             "PAYMENT",
           ),
           title: Divider(),
-          content: Container(
+          content: SizedBox(
             height: 550,
             child: SingleChildScrollView(
               child: Column(
@@ -279,7 +298,7 @@ class _ShoppingMethodPageState extends State<ShoppingMethodPage> {
               ),
               Expanded(
                 child: Text(
-                  "\$" + price.toStringAsFixed(0),
+                  "\$${price.toStringAsFixed(0)}",
                   textAlign: TextAlign.end,
                   style: TextStyle(
                     color: Color(0xFF6CC51D),

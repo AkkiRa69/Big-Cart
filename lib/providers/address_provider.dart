@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grocery_store/model/address_model.dart';
 
 class AddressProvider extends ChangeNotifier {
-  List<AddressModel> _addressList = [
+  final List<AddressModel> _addressList = [
     AddressModel(
         name: "San Monyakkhara",
         address: "Khan Tuol Kork",

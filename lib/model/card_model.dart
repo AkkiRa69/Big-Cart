@@ -1,6 +1,6 @@
 class CardModel {
-  String name, cardNum,cvv;
-  DateTime expires;
+  String name;
+  int cardNum,cvv,expires;
 
   CardModel({
     required this.name,

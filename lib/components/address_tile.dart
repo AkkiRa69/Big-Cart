@@ -5,7 +5,8 @@ class AddressTile extends StatelessWidget {
   final AddressModel add;
   final String icon;
   final Color? color;
-  const AddressTile({super.key, required this.add, required this.icon,this.color});
+  const AddressTile(
+      {super.key, required this.add, required this.icon, this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +25,12 @@ class AddressTile extends StatelessWidget {
                   color: color,
                   shape: BoxShape.circle,
                 ),
-                padding: EdgeInsets.all(17),
+                padding: const EdgeInsets.all(17),
                 child: Image.asset(
                   icon,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 15,
               ),
               Column(
@@ -37,14 +38,15 @@ class AddressTile extends StatelessWidget {
                 children: [
                   Text(
                     add.name,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width * 0.45,
                     child: Text(
                       "${add.country}, ${add.address}, ${add.city}",
                       maxLines: 2,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         color: Color(0xff868889),
                       ),
@@ -52,7 +54,7 @@ class AddressTile extends StatelessWidget {
                   ),
                   Text(
                     "${add.zipCode} ${add.phone}",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),

@@ -4,9 +4,10 @@ import 'package:grocery_store/model/order_model.dart';
 class OrderProvider extends ChangeNotifier {
   int _orderNo = 9084;
 
-  List<OrderModel> _orderList = [];
-
+  final List<OrderModel> _orderList = [];
+  // final List<double> _totalPrice = [];
   List<OrderModel> get orderList => _orderList;
+  // List get totalPrice => _totalPrice;
 
   int get orderNo => _orderNo;
 
@@ -14,6 +15,11 @@ class OrderProvider extends ChangeNotifier {
     _orderNo++;
     notifyListeners();
   }
+
+  // void addPriceToTotalPrice(double item) {
+  //   _totalPrice.add(item);
+  //   notifyListeners();
+  // }
 
   bool isEmpty() {
     return _orderList.isEmpty;

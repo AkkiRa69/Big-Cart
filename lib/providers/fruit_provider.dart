@@ -12,7 +12,7 @@ class FruitProvider extends ChangeNotifier {
       qty: 0,
       rate: 3,
       review: 155,
-      color: Color(0xFFFFCEC1),
+      color: const Color(0xFFFFCEC1),
       image: "assets/fruits/peach.png",
       description:
           "Organic Mountain works as a seller for many organic growers of organic lemons. Organic lemons are easy to spot in your produce aisle. They are just like regular lemons, but they will usually have a few more scars on the outside of the lemon skin. Organic lemons are considered to be the world's finest lemon for juicing more",
@@ -24,7 +24,7 @@ class FruitProvider extends ChangeNotifier {
       qty: 0,
       rate: 5,
       review: 122,
-      color: Color(0xFFFCFFD9),
+      color: const Color(0xFFFCFFD9),
       image: "assets/fruits/aocado.png",
       description:
           "Organic Mountain works as a seller for many organic growers of organic lemons. Organic lemons are easy to spot in your produce aisle. They are just like regular lemons, but they will usually have a few more scars on the outside of the lemon skin. Organic lemons are considered to be the world's finest lemon for juicing more",
@@ -36,7 +36,7 @@ class FruitProvider extends ChangeNotifier {
       qty: 0,
       rate: 7,
       review: 555,
-      color: Color(0xFFFFE6C2),
+      color: const Color(0xFFFFE6C2),
       image: "assets/fruits/pineapple-pieces.png",
       description:
           "Organic Mountain works as a seller for many organic growers of organic lemons. Organic lemons are easy to spot in your produce aisle. They are just like regular lemons, but they will usually have a few more scars on the outside of the lemon skin. Organic lemons are considered to be the world's finest lemon for juicing more",
@@ -48,7 +48,7 @@ class FruitProvider extends ChangeNotifier {
       qty: 0,
       review: 365,
       rate: 2,
-      color: Color(0xFFFEE1ED),
+      color: const Color(0xFFFEE1ED),
       image: "assets/fruits/grapes.png",
       description:
           "Organic Mountain works as a seller for many organic growers of organic lemons. Organic lemons are easy to spot in your produce aisle. They are just like regular lemons, but they will usually have a few more scars on the outside of the lemon skin. Organic lemons are considered to be the world's finest lemon for juicing more",
@@ -60,7 +60,7 @@ class FruitProvider extends ChangeNotifier {
       qty: 0,
       review: 8555,
       rate: 6,
-      color: Color(0xFFFFE3E2),
+      color: const Color(0xFFFFE3E2),
       image: "assets/fruits/pomegranate.png",
       description:
           "Organic Mountain works as a seller for many organic growers of organic lemons. Organic lemons are easy to spot in your produce aisle. They are just like regular lemons, but they will usually have a few more scars on the outside of the lemon skin. Organic lemons are considered to be the world's finest lemon for juicing more",
@@ -72,7 +72,7 @@ class FruitProvider extends ChangeNotifier {
       qty: 0,
       review: 2500,
       rate: 8,
-      color: Color(0xFFD2FFD0),
+      color: const Color(0xFFD2FFD0),
       image: "assets/fruits/green-fresh-broccoli.png",
       description:
           "Organic Mountain works as a seller for many organic growers of organic lemons. Organic lemons are easy to spot in your produce aisle. They are just like regular lemons, but they will usually have a few more scars on the outside of the lemon skin. Organic lemons are considered to be the world's finest lemon for juicing more",
@@ -84,7 +84,7 @@ class FruitProvider extends ChangeNotifier {
       qty: 0,
       review: 4500,
       rate: 3,
-      color: Color(0xFFF2FFE6),
+      color: const Color(0xFFF2FFE6),
       image: "assets/fruits/lime.png",
       description:
           "Organic Mountain works as a seller for many organic growers of organic lemons. Organic lemons are easy to spot in your produce aisle. They are just like regular lemons, but they will usually have a few more scars on the outside of the lemon skin. Organic lemons are considered to be the world's finest lemon for juicing more",
@@ -97,6 +97,14 @@ class FruitProvider extends ChangeNotifier {
   List<FruitModel> _shoppingCart = [];
   //get cart
   List<FruitModel> get shoppingCart => _shoppingCart;
+
+  int isCartEmpty() {
+    if (_shoppingCart.isEmpty) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
 
   //add to cart
   void addProductToCart(FruitModel fruit) {
@@ -114,7 +122,9 @@ class FruitProvider extends ChangeNotifier {
 
   double totalPrice(List<FruitModel> cart) {
     double total = 0;
-    for (int i = 0; i < cart.length; i++) total += cart[i].price * cart[i].qty;
+    for (int i = 0; i < cart.length; i++) {
+      total += cart[i].price * cart[i].qty;
+    }
     return total;
   }
 
@@ -123,7 +133,7 @@ class FruitProvider extends ChangeNotifier {
   List<FruitModel> get favList => _favList;
 
   void addProductToFavorites(FruitModel fruit) {
-   if (!_favList.contains(fruit)) {
+    if (!_favList.contains(fruit)) {
       _favList.add(fruit);
       notifyListeners();
     }
