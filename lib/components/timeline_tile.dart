@@ -20,13 +20,13 @@ class MyTimeLineTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 115,
-      padding: EdgeInsets.symmetric(horizontal: 17),
+      padding: const EdgeInsets.symmetric(horizontal: 17),
       child: TimelineTile(
         isFirst: isFirst,
         isLast: isLast,
         //decorate line stlye
         beforeLineStyle: LineStyle(
-          color: isPast ? Color(0xff28B446) : Color(0xff868889),
+          color: isPast ? const Color(0xff28B446) : const Color(0xff868889),
           thickness: 3,
         ),
         //decorate icon stlye
@@ -35,12 +35,13 @@ class MyTimeLineTile extends StatelessWidget {
           height: 66,
           indicator: Container(
             decoration: BoxDecoration(
-                color: isPast ? Color(0xFFEBFFD7) : Color(0xffF5F5F5),
+                color:
+                    isPast ? const Color(0xFFEBFFD7) : const Color(0xffF5F5F5),
                 shape: BoxShape.circle),
             padding: const EdgeInsets.all(12.0),
             child: Image.asset(
               icon,
-              color: isPast ? Color(0xff28B446) : Color(0xff868889),
+              color: isPast ? const Color(0xff28B446) : const Color(0xff868889),
             ),
           ),
         ),

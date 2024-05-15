@@ -7,7 +7,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class IntroPage extends StatefulWidget {
-  IntroPage({super.key});
+  const IntroPage({super.key});
 
   @override
   State<IntroPage> createState() => _IntroPageState();

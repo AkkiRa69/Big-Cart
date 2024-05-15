@@ -8,7 +8,7 @@ import 'package:page_transition/page_transition.dart';
 
 class OrderSuccessPage extends StatelessWidget {
   final String appBarTitle, title, subtitle, btnText;
-  final void Function()? onPressed;
+  final void Function(BuildContext)? onPressed;
   const OrderSuccessPage(
       {super.key,
       required this.btnText,
@@ -57,7 +57,7 @@ class OrderSuccessPage extends StatelessWidget {
                 Expanded(
                   child: LinearButton(
                     text: btnText,
-                    onPressed: onPressed,
+                   onPressed: () => onPressed!(context),
                   ),
                 ),
               ],

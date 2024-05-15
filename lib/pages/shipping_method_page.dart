@@ -40,7 +40,7 @@ class _ShoppingMethodPageState extends State<ShoppingMethodPage> {
                 subtitle: 'You will get a response within a few minutes',
                 title: "Your order was successful!",
                 btnText: 'Track order',
-                onPressed: () {
+                onPressed: (BuildContext context) {
                   Navigator.push(
                       context,
                       PageTransition(

@@ -20,7 +20,7 @@ class FruitProvider extends ChangeNotifier {
     FruitModel(
       name: "Avacoda",
       price: 7.00,
-      weight: "dozen",
+      weight: "1kg",
       qty: 0,
       rate: 5,
       review: 122,
@@ -32,7 +32,7 @@ class FruitProvider extends ChangeNotifier {
     FruitModel(
       name: "Pineapple",
       price: 9.90,
-      weight: "dozen",
+      weight: "3kg",
       qty: 0,
       rate: 7,
       review: 555,
@@ -56,7 +56,7 @@ class FruitProvider extends ChangeNotifier {
     FruitModel(
       name: "Pomegranate",
       price: 2.09,
-      weight: "dozen",
+      weight: "2.5kg",
       qty: 0,
       review: 8555,
       rate: 6,
@@ -68,7 +68,7 @@ class FruitProvider extends ChangeNotifier {
     FruitModel(
       name: "Fresh Broccoli",
       price: 3.00,
-      weight: "dozen",
+      weight: "1.22kg",
       qty: 0,
       review: 2500,
       rate: 8,

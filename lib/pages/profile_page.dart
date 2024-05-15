@@ -9,6 +9,7 @@ import 'package:grocery_store/profile%20pages/credit_card_page.dart';
 import 'package:grocery_store/profile%20pages/my_Address_page.dart';
 import 'package:grocery_store/profile%20pages/my_fav_page.dart';
 import 'package:grocery_store/profile%20pages/my_order_page.dart';
+import 'package:grocery_store/profile%20pages/notification_page.dart';
 import 'package:page_transition/page_transition.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -86,7 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
     Navigator.push(
         context,
         PageTransition(
-            child: AboutMePage(), type: PageTransitionType.rightToLeft));
+            child: NotificationPage(), type: PageTransitionType.rightToLeft));
   }
 
   static void signOut(BuildContext context) {
@@ -160,7 +161,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Stack(
                     alignment: Alignment.center,
                     children: [
-                      Container(
+                      SizedBox(
                         height: 114,
                         width: 114,
                       ),

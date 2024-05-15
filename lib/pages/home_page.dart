@@ -8,6 +8,7 @@ import 'package:grocery_store/components/search_bar.dart';
 import 'package:grocery_store/model/fruit_model.dart';
 import 'package:grocery_store/pages/category_page.dart';
 import 'package:grocery_store/pages/product_detail_page.dart';
+import 'package:grocery_store/pages/product_page.dart';
 import 'package:grocery_store/providers/fruit_provider.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -130,7 +131,14 @@ class _HomePageState extends State<HomePage>
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              PageTransition(
+                                  child: ProductPage(
+                                      fruits: fruits, title: "Vegetables"),
+                                  type: PageTransitionType.bottomToTop));
+                        },
                         icon: Icon(Icons.arrow_forward_ios),
                       ),
                     ],

@@ -6,7 +6,7 @@ import 'package:grocery_store/components/liner_button.dart';
 import 'package:grocery_store/model/fruit_model.dart';
 import 'package:grocery_store/model/order_model.dart';
 import 'package:grocery_store/pages/controller_page.dart';
-import 'package:grocery_store/pages/shipping_method_page.dart';
+import 'package:grocery_store/pages/new_shipping_method.dart';
 import 'package:grocery_store/providers/fruit_provider.dart';
 import 'package:grocery_store/providers/order_provider.dart';
 import 'package:page_transition/page_transition.dart';
@@ -170,7 +170,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                             Navigator.push(
                               context,
                               PageTransition(
-                                child: ShoppingMethodPage(),
+                                child: NewShippingMethodPage(),
                                 type: PageTransitionType.rightToLeft,
                               ),
                             );
