@@ -42,9 +42,7 @@ class HozTimeLineTile extends StatelessWidget {
             child: child,
           ),
         ),
-        // endChild: Container(
-        // child: child,
-        // ),
+        
       ),
     );
   }

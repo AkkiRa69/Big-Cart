@@ -30,7 +30,11 @@ class SignUpPage extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.blue,
             ),
-            child: Image.asset("assets/images/cover3.png"),
+            child: Image.asset(
+              "assets/images/cover3.png",
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.cover,
+            ),
           ),
           Positioned(
             bottom: 0,

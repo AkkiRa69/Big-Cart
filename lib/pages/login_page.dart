@@ -3,14 +3,22 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_store/components/app_bar.dart';
 import 'package:grocery_store/components/liner_button.dart';
+import 'package:grocery_store/components/my_switch.dart';
 import 'package:grocery_store/pages/controller_page.dart';
+import 'package:grocery_store/pages/forgot_password_pages/password_recovery_page.dart';
 import 'package:grocery_store/pages/home_page.dart';
 import 'package:grocery_store/pages/signup_page.dart';
 import 'package:grocery_store/pages/welcome_page.dart';
 import 'package:page_transition/page_transition.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   void backToWelcomePage(BuildContext context) {
     Navigator.push(
         context,
@@ -25,6 +33,8 @@ class LoginPage extends StatelessWidget {
           builder: (context) => HomePage(),
         ));
   }
+
+  bool isSwitch = true;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +52,11 @@ class LoginPage extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.blue,
             ),
-            child: Image.asset("assets/images/cover2.png"),
+            child: Image.asset(
+              "assets/images/cover2.png",
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.cover,
+            ),
           ),
           Positioned(
             bottom: 0,
@@ -122,40 +136,50 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                         //remember me
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.toggle_off_outlined,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                MySwitch(
+                                    isSwitch: isSwitch,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        isSwitch = value;
+                                      });
+                                    }),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  "Remember me",
+                                  style: TextStyle(
                                     color: Colors.grey,
-                                    size: 32,
+                                    fontSize: 16,
                                   ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    "Remember me",
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ],
+                                ),
+                              ],
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        child: PasswordRecoveryPage(),
+                                        type: PageTransitionType.fade));
+                              },
+                              style: TextButton.styleFrom(
+                                elevation: 0,
                               ),
-                              Text(
+                              child: Text(
                                 "Forgot password",
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: Color(0xFF407EC7),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                         //login button
                         Row(
