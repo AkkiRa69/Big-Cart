@@ -145,32 +145,35 @@ class WelcomePage extends StatelessWidget {
                     ),
                   ),
                   //login text
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Already have an account? ",
-                        style: TextStyle(
-                          color: Colors.grey,
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              PageTransition(
-                                  child: LoginPage(),
-                                  type: PageTransitionType.rightToLeft));
-                        },
-                        child: Text(
-                          "Login",
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Already have an account? ",
                           style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
                           ),
                         ),
-                      ),
-                    ],
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    child: LoginPage(),
+                                    type: PageTransitionType.rightToLeft));
+                          },
+                          child: Text(
+                            "Login",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

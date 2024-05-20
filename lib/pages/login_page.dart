@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
           Container(
             alignment: Alignment.topCenter,
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.transparent,
             ),
             child: Image.asset(
               "assets/images/cover2.png",
@@ -201,32 +201,35 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   //sign up text
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Don't have an account? ",
-                        style: TextStyle(
-                          color: Colors.grey,
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              PageTransition(
-                                  child: SignUpPage(),
-                                  type: PageTransitionType.rightToLeft));
-                        },
-                        child: Text(
-                          "Sign up",
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Don't have an account? ",
                           style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
                           ),
                         ),
-                      ),
-                    ],
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    child: SignUpPage(),
+                                    type: PageTransitionType.rightToLeft));
+                          },
+                          child: Text(
+                            "Sign up",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

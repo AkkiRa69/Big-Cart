@@ -28,11 +28,12 @@ class SignUpPage extends StatelessWidget {
           Container(
             alignment: Alignment.topCenter,
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.transparent,
             ),
             child: Image.asset(
               "assets/images/cover3.png",
               width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.55,
               fit: BoxFit.cover,
             ),
           ),
@@ -136,44 +137,49 @@ class SignUpPage extends StatelessWidget {
                         Row(
                           children: [
                             Expanded(
-                                child: LinearButton(
-                                    text: "Signup",
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          PageTransition(
-                                              child: ControllerPage(),
-                                              type: PageTransitionType
-                                                  .leftToRight));
-                                    })),
+                              child: LinearButton(
+                                text: "Signup",
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      PageTransition(
+                                          child: ControllerPage(),
+                                          type:
+                                              PageTransitionType.leftToRight));
+                                },
+                              ),
+                            ),
                           ],
                         )
                       ],
                     ),
                   ),
                   //sign up text
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Already have an account? ",
-                        style: TextStyle(
-                          color: Colors.grey,
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          backToLoginPage(context);
-                        },
-                        child: Text(
-                          "Login",
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Already have an account? ",
                           style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
                           ),
                         ),
-                      ),
-                    ],
+                        GestureDetector(
+                          onTap: () {
+                            backToLoginPage(context);
+                          },
+                          child: Text(
+                            "Login",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
