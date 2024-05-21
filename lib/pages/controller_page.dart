@@ -20,7 +20,7 @@ class _ControllerPageState extends State<ControllerPage> {
     const HomePage(),
     const ProfilePage(),
     const FavoritePage(),
-     CartControllerPage(),
+    const CartControllerPage(),
   ];
 
   late int index = 0;

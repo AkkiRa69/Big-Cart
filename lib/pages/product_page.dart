@@ -1,8 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:grocery_store/components/features_product.dart';
+import 'package:grocery_store/components/product.dart';
 import 'package:grocery_store/model/fruit_model.dart';
+import 'package:grocery_store/pages/home_page.dart';
 import 'package:grocery_store/pages/product_detail_page.dart';
 import 'package:grocery_store/providers/fruit_provider.dart';
 import 'package:page_transition/page_transition.dart';
@@ -29,6 +30,8 @@ class _ProductPageState extends State<ProductPage> {
     );
   }
 
+  HomePage hp = HomePage();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,42 +50,61 @@ class _ProductPageState extends State<ProductPage> {
           )
         ],
       ),
-      body: Container(
-        margin: EdgeInsets.symmetric(vertical: 17),
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: 17),
-        child: GridView.builder(
-          shrinkWrap: true,
-          itemCount: widget.fruits.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisSpacing: 17,
-              mainAxisSpacing: 17,
-              crossAxisCount: 2,
-              childAspectRatio: 1 / 1.50),
-          itemBuilder: (context, index) {
-            return Product(
-              onPressed: () {
-                context
-                    .read<FruitProvider>()
-                    .addProductToFavorites(widget.fruits[index]);
-                setState(() {
-                  widget.fruits[index].isFav = !widget.fruits[index].isFav;
-                  if (widget.fruits[index].isFav == false) {
-                    context
-                        .read<FruitProvider>()
-                        .removeProductFavorite(widget.fruits[index]);
-                  }
-                });
-              },
-              fruits: widget.fruits[index],
-              isFav: widget.fruits[index].isFav,
-              onTap: () {
-                navigateToProductDetail(context, widget.fruits[index]);
-              },
-            );
-          },
-        ),
+      body: ListView.builder(
+        padding: EdgeInsets.symmetric(horizontal: 17, vertical: 17),
+        itemCount: (widget.fruits.length / 2).ceil(),
+        itemBuilder: (context, index) {
+          int firstIndex = index * 2;
+          int secondIndex = firstIndex + 1;
+          double height = 285;
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 17.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    height: height,
+                    child: buildProduct(widget.fruits[firstIndex]),
+                  ),
+                ),
+                SizedBox(width: 17), // Horizontal spacing between columns
+                if (secondIndex < widget.fruits.length)
+                  Expanded(
+                    child: SizedBox(
+                      height: height,
+                      child: buildProduct(widget.fruits[secondIndex]),
+                    ),
+                  )
+                else
+                  Expanded(
+                    child: SizedBox(
+                        height: height), // Placeholder for layout alignment
+                  ),
+              ],
+            ),
+          );
+        },
       ),
+    );
+  }
+
+  Widget buildProduct(FruitModel fruits) {
+    return Product(
+      onPressed: () {
+        context.read<FruitProvider>().addProductToFavorites(fruits);
+        setState(() {
+          fruits.isFav = !fruits.isFav;
+          if (!fruits.isFav) {
+            context.read<FruitProvider>().removeProductFavorite(fruits);
+          }
+        });
+      },
+      isFav: fruits.isFav,
+      fruits: fruits,
+      onTap: () {
+        navigateToProductDetail(context, fruits);
+      },
     );
   }
 }

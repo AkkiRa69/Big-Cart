@@ -3,12 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_store/components/banner.dart';
 import 'package:grocery_store/components/categories.dart';
-import 'package:grocery_store/components/features_product.dart';
+import 'package:grocery_store/components/product.dart';
 import 'package:grocery_store/components/search_bar.dart';
 import 'package:grocery_store/model/fruit_model.dart';
 import 'package:grocery_store/pages/category_page.dart';
+import 'package:grocery_store/pages/filter_page.dart';
 import 'package:grocery_store/pages/product_detail_page.dart';
 import 'package:grocery_store/pages/product_page.dart';
+import 'package:grocery_store/pages/search_tap_page.dart';
 import 'package:grocery_store/providers/fruit_provider.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -77,7 +79,32 @@ class _HomePageState extends State<HomePage>
               scrollDirection: Axis.vertical,
               children: [
                 //search bar
-                MySearchBar(),
+                MySearchBar(
+                  searchTap: () {
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                          child: SearchTapPage(),
+                          type: PageTransitionType.topToBottom),
+                    );
+                  },
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        child: FilterPage(),
+                        type: PageTransitionType.bottomToTop,
+                        duration: Duration(
+                            milliseconds: 300), // Adjust duration as needed
+                        reverseDuration: Duration(
+                            milliseconds:
+                                300), // Adjust reverse duration as needed
+                        curve: Curves
+                            .easeInOut, // Add a curve for smooth animation
+                      ),
+                    );
+                  },
+                ),
 
                 //banner
                 Padding(
@@ -144,47 +171,73 @@ class _HomePageState extends State<HomePage>
                     ],
                   ),
                 ),
-                Container(
-                  width: double.infinity,
+                ListView.builder(
                   padding: EdgeInsets.symmetric(horizontal: 17),
-                  child: GridView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: fruits.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisSpacing: 17,
-                        mainAxisSpacing: 17,
-                        crossAxisCount: 2,
-                        childAspectRatio: 1 / 1.5),
-                    itemBuilder: (context, index) {
-                      return Product(
-                        onPressed: () {
-                          context
-                              .read<FruitProvider>()
-                              .addProductToFavorites(fruits[index]);
-                          setState(() {
-                            fruits[index].isFav = !fruits[index].isFav;
-                            if (fruits[index].isFav == false) {
-                              context
-                                  .read<FruitProvider>()
-                                  .removeProductFavorite(fruits[index]);
-                            }
-                          });
-                        },
-                        isFav: fruits[index].isFav,
-                        fruits: fruits[index],
-                        onTap: () {
-                          navigateToProductDetail(context, fruits[index]);
-                        },
-                      );
-                    },
-                  ),
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: (fruits.length / 2).ceil(),
+                  itemBuilder: (context, index) {
+                    int firstIndex = index * 2;
+                    int secondIndex = firstIndex + 1;
+                    double height = 285;
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 17.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: SizedBox(
+                              height: height,
+                              child: buildProduct(fruits[firstIndex]),
+                            ),
+                          ),
+                          SizedBox(
+                              width: 17), // Horizontal spacing between columns
+                          if (secondIndex < fruits.length)
+                            Expanded(
+                              child: SizedBox(
+                                height: height,
+                                child: buildProduct(fruits[secondIndex]),
+                              ),
+                            )
+                          else
+                            Expanded(
+                              child: SizedBox(
+                                  height:
+                                      height), // Placeholder for layout alignment
+                            ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+                SizedBox(
+                  height: 60,
                 ),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildProduct(FruitModel fruits) {
+    return Product(
+      onPressed: () {
+        context.read<FruitProvider>().addProductToFavorites(fruits);
+        setState(() {
+          fruits.isFav = !fruits.isFav;
+          if (!fruits.isFav) {
+            context.read<FruitProvider>().removeProductFavorite(fruits);
+          }
+        });
+      },
+      isFav: fruits.isFav,
+      fruits: fruits,
+      onTap: () {
+        navigateToProductDetail(context, fruits);
+      },
     );
   }
 

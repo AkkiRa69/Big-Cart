@@ -12,9 +12,11 @@ class ProductDetail extends StatelessWidget {
   final FruitModel fruit;
   final void Function()? increment;
   final void Function()? decrement;
+  final void Function()? onTap;
   const ProductDetail(
       {super.key,
       required this.fruit,
+      required this.onTap,
       required this.decrement,
       required this.increment});
 
@@ -35,7 +37,7 @@ class ProductDetail extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "\$" + fruit.price.toStringAsFixed(2),
+                  "\$${fruit.price.toStringAsFixed(2)}",
                   style: TextStyle(
                     color: Colors.green,
                     fontSize: 16,
@@ -64,32 +66,35 @@ class ProductDetail extends StatelessWidget {
             SizedBox(
               height: 7,
             ),
-            Row(
-              children: [
-                Text(
-                  fruit.rate.toString(),
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  width: 3,
-                ),
-                for (int i = 0; i < fruit.rate; i++)
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.star,
-                        size: 20,
-                        color: Colors.amber,
-                      ),
-                    ],
+            GestureDetector(
+              onTap: onTap,
+              child: Row(
+                children: [
+                  Text(
+                    fruit.rate.toString(),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                Text(
-                  "(${fruit.review} reviews)",
-                  style: TextStyle(
-                    color: Colors.grey[500],
+                  SizedBox(
+                    width: 3,
                   ),
-                ),
-              ],
+                  for (int i = 0; i < fruit.rate; i++)
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.star,
+                          size: 20,
+                          color: Colors.amber,
+                        ),
+                      ],
+                    ),
+                  Text(
+                    "(${fruit.review} reviews)",
+                    style: TextStyle(
+                      color: Colors.grey[500],
+                    ),
+                  ),
+                ],
+              ),
             ),
 
             //description

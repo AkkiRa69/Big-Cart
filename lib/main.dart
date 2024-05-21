@@ -5,6 +5,8 @@ import 'package:grocery_store/providers/address_provider.dart';
 import 'package:grocery_store/providers/card_provider.dart';
 import 'package:grocery_store/providers/fruit_provider.dart';
 import 'package:grocery_store/providers/order_provider.dart';
+import 'package:grocery_store/providers/randomuser_provider.dart';
+import 'package:grocery_store/providers/search_provider.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -36,6 +38,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => CardProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SearchProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RandomuserProvider(),
         ),
       ],
       child: const GetMaterialApp(

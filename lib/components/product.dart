@@ -20,9 +20,7 @@ class Product extends StatefulWidget {
   State<Product> createState() => _ProductState();
 }
 
-
 class _ProductState extends State<Product> {
-  
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -96,23 +94,32 @@ class _ProductState extends State<Product> {
             Divider(
               color: Colors.grey[300],
             ),
-            Container(
-              padding: EdgeInsets.all(5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "assets/icons/shop_bag.png",
-                    height: 18,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 8, left: 8, right: 8),
+                child: IconButton(
+                  onPressed: widget.onTap,
+                  icon: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        "assets/icons/shop_bag.png",
+                        height: 20,
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        "Add to cart",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    "Add to cart",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                  )
-                ],
+                ),
               ),
             ),
           ],

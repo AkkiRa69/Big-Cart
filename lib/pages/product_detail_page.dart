@@ -1,10 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_store/components/product_detail.dart';
 import 'package:grocery_store/components/product_image.dart';
 import 'package:grocery_store/model/fruit_model.dart';
+import 'package:grocery_store/pages/review_page.dart';
+import 'package:page_transition/page_transition.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final FruitModel fruit;
@@ -48,6 +49,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               fruit: widget.fruit,
               increment: () => increment(),
               decrement: () => decrement(),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        child: ReviewPage(),
+                        type: PageTransitionType.bottomToTop));
+              },
             ),
           ),
         ],

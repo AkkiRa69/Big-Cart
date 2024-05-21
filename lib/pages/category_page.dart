@@ -51,6 +51,7 @@ class CategoryPage extends StatelessWidget {
             crossAxisCount: 3,
             mainAxisSpacing: 15,
             crossAxisSpacing: 12,
+            
           ),
           itemBuilder: (context, index) {
             return PerCategory(
