@@ -9,36 +9,36 @@ RandomUserModel randomUserModelFromMap(String str) => RandomUserModel.fromMap(js
 String randomUserModelToMap(RandomUserModel data) => json.encode(data.toMap());
 
 class RandomUserModel {
-    List<Result>? results;
-    Info? info;
+    List<Result> results;
+    Info info;
 
     RandomUserModel({
-        this.results,
-        this.info,
+        required this.results,
+        required this.info,
     });
 
     factory RandomUserModel.fromMap(Map<String, dynamic> json) => RandomUserModel(
-        results: json["results"] == null ? [] : List<Result>.from(json["results"]!.map((x) => Result.fromMap(x))),
-        info: json["info"] == null ? null : Info.fromMap(json["info"]),
+        results: List<Result>.from(json["results"].map((x) => Result.fromMap(x))),
+        info: Info.fromMap(json["info"]),
     );
 
     Map<String, dynamic> toMap() => {
-        "results": results == null ? [] : List<dynamic>.from(results!.map((x) => x.toMap())),
-        "info": info?.toMap(),
+        "results": List<dynamic>.from(results.map((x) => x.toMap())),
+        "info": info.toMap(),
     };
 }
 
 class Info {
-    String? seed;
-    int? results;
-    int? page;
-    String? version;
+    String seed;
+    int results;
+    int page;
+    String version;
 
     Info({
-        this.seed,
-        this.results,
-        this.page,
-        this.version,
+        required this.seed,
+        required this.results,
+        required this.page,
+        required this.version,
     });
 
     factory Info.fromMap(Map<String, dynamic> json) => Info(
@@ -57,92 +57,92 @@ class Info {
 }
 
 class Result {
-    String? gender;
-    Name? name;
-    Location? location;
-    String? email;
-    Login? login;
-    Dob? dob;
-    Dob? registered;
-    String? phone;
-    String? cell;
-    Id? id;
-    Picture? picture;
-    String? nat;
+    String gender;
+    Name name;
+    Location location;
+    String email;
+    Login login;
+    Dob dob;
+    Dob registered;
+    String phone;
+    String cell;
+    Id id;
+    Picture picture;
+    String nat;
 
     Result({
-        this.gender,
-        this.name,
-        this.location,
-        this.email,
-        this.login,
-        this.dob,
-        this.registered,
-        this.phone,
-        this.cell,
-        this.id,
-        this.picture,
-        this.nat,
+        required this.gender,
+        required this.name,
+        required this.location,
+        required this.email,
+        required this.login,
+        required this.dob,
+        required this.registered,
+        required this.phone,
+        required this.cell,
+        required this.id,
+        required this.picture,
+        required this.nat,
     });
 
     factory Result.fromMap(Map<String, dynamic> json) => Result(
         gender: json["gender"],
-        name: json["name"] == null ? null : Name.fromMap(json["name"]),
-        location: json["location"] == null ? null : Location.fromMap(json["location"]),
+        name: Name.fromMap(json["name"]),
+        location: Location.fromMap(json["location"]),
         email: json["email"],
-        login: json["login"] == null ? null : Login.fromMap(json["login"]),
-        dob: json["dob"] == null ? null : Dob.fromMap(json["dob"]),
-        registered: json["registered"] == null ? null : Dob.fromMap(json["registered"]),
+        login: Login.fromMap(json["login"]),
+        dob: Dob.fromMap(json["dob"]),
+        registered: Dob.fromMap(json["registered"]),
         phone: json["phone"],
         cell: json["cell"],
-        id: json["id"] == null ? null : Id.fromMap(json["id"]),
-        picture: json["picture"] == null ? null : Picture.fromMap(json["picture"]),
+        id: Id.fromMap(json["id"]),
+        picture: Picture.fromMap(json["picture"]),
         nat: json["nat"],
     );
 
     Map<String, dynamic> toMap() => {
         "gender": gender,
-        "name": name?.toMap(),
-        "location": location?.toMap(),
+        "name": name.toMap(),
+        "location": location.toMap(),
         "email": email,
-        "login": login?.toMap(),
-        "dob": dob?.toMap(),
-        "registered": registered?.toMap(),
+        "login": login.toMap(),
+        "dob": dob.toMap(),
+        "registered": registered.toMap(),
         "phone": phone,
         "cell": cell,
-        "id": id?.toMap(),
-        "picture": picture?.toMap(),
+        "id": id.toMap(),
+        "picture": picture.toMap(),
         "nat": nat,
     };
 }
 
 class Dob {
-    DateTime? date;
-    int? age;
+    DateTime date;
+    int age;
 
     Dob({
-        this.date,
-        this.age,
+        required this.date,
+        required this.age,
     });
 
     factory Dob.fromMap(Map<String, dynamic> json) => Dob(
-        date: json["date"] == null ? null : DateTime.parse(json["date"]),
+        date: DateTime.parse(json["date"]),
         age: json["age"],
     );
 
     Map<String, dynamic> toMap() => {
-        "date": date?.toIso8601String(),
+        "date": date.toIso8601String(),
         "age": age,
     };
 }
 
 class Id {
-    String? name;
+    String name;
     String? value;
 
     Id({
-        this.name,
-        this.value,
+        required this.name,
+        required this.value,
     });
 
     factory Id.fromMap(Map<String, dynamic> json) => Id(
@@ -157,52 +157,52 @@ class Id {
 }
 
 class Location {
-    Street? street;
-    String? city;
-    String? state;
-    String? country;
+    Street street;
+    String city;
+    String state;
+    String country;
     dynamic postcode;
-    Coordinates? coordinates;
-    Timezone? timezone;
+    Coordinates coordinates;
+    Timezone timezone;
 
     Location({
-        this.street,
-        this.city,
-        this.state,
-        this.country,
-        this.postcode,
-        this.coordinates,
-        this.timezone,
+        required this.street,
+        required this.city,
+        required this.state,
+        required this.country,
+        required this.postcode,
+        required this.coordinates,
+        required this.timezone,
     });
 
     factory Location.fromMap(Map<String, dynamic> json) => Location(
-        street: json["street"] == null ? null : Street.fromMap(json["street"]),
+        street: Street.fromMap(json["street"]),
         city: json["city"],
         state: json["state"],
         country: json["country"],
         postcode: json["postcode"],
-        coordinates: json["coordinates"] == null ? null : Coordinates.fromMap(json["coordinates"]),
-        timezone: json["timezone"] == null ? null : Timezone.fromMap(json["timezone"]),
+        coordinates: Coordinates.fromMap(json["coordinates"]),
+        timezone: Timezone.fromMap(json["timezone"]),
     );
 
     Map<String, dynamic> toMap() => {
-        "street": street?.toMap(),
+        "street": street.toMap(),
         "city": city,
         "state": state,
         "country": country,
         "postcode": postcode,
-        "coordinates": coordinates?.toMap(),
-        "timezone": timezone?.toMap(),
+        "coordinates": coordinates.toMap(),
+        "timezone": timezone.toMap(),
     };
 }
 
 class Coordinates {
-    String? latitude;
-    String? longitude;
+    String latitude;
+    String longitude;
 
     Coordinates({
-        this.latitude,
-        this.longitude,
+        required this.latitude,
+        required this.longitude,
     });
 
     factory Coordinates.fromMap(Map<String, dynamic> json) => Coordinates(
@@ -217,12 +217,12 @@ class Coordinates {
 }
 
 class Street {
-    int? number;
-    String? name;
+    int number;
+    String name;
 
     Street({
-        this.number,
-        this.name,
+        required this.number,
+        required this.name,
     });
 
     factory Street.fromMap(Map<String, dynamic> json) => Street(
@@ -237,12 +237,12 @@ class Street {
 }
 
 class Timezone {
-    String? offset;
-    String? description;
+    String offset;
+    String description;
 
     Timezone({
-        this.offset,
-        this.description,
+        required this.offset,
+        required this.description,
     });
 
     factory Timezone.fromMap(Map<String, dynamic> json) => Timezone(
@@ -257,22 +257,22 @@ class Timezone {
 }
 
 class Login {
-    String? uuid;
-    String? username;
-    String? password;
-    String? salt;
-    String? md5;
-    String? sha1;
-    String? sha256;
+    String uuid;
+    String username;
+    String password;
+    String salt;
+    String md5;
+    String sha1;
+    String sha256;
 
     Login({
-        this.uuid,
-        this.username,
-        this.password,
-        this.salt,
-        this.md5,
-        this.sha1,
-        this.sha256,
+        required this.uuid,
+        required this.username,
+        required this.password,
+        required this.salt,
+        required this.md5,
+        required this.sha1,
+        required this.sha256,
     });
 
     factory Login.fromMap(Map<String, dynamic> json) => Login(
@@ -297,14 +297,14 @@ class Login {
 }
 
 class Name {
-    String? title;
-    String? first;
-    String? last;
+    String title;
+    String first;
+    String last;
 
     Name({
-        this.title,
-        this.first,
-        this.last,
+        required this.title,
+        required this.first,
+        required this.last,
     });
 
     factory Name.fromMap(Map<String, dynamic> json) => Name(
@@ -321,14 +321,14 @@ class Name {
 }
 
 class Picture {
-    String? large;
-    String? medium;
-    String? thumbnail;
+    String large;
+    String medium;
+    String thumbnail;
 
     Picture({
-        this.large,
-        this.medium,
-        this.thumbnail,
+        required this.large,
+        required this.medium,
+        required this.thumbnail,
     });
 
     factory Picture.fromMap(Map<String, dynamic> json) => Picture(

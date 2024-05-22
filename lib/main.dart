@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:grocery_store/pages/intro_page.dart';
 import 'package:grocery_store/providers/address_provider.dart';
 import 'package:grocery_store/providers/card_provider.dart';
+import 'package:grocery_store/providers/comment_provider.dart';
 import 'package:grocery_store/providers/fruit_provider.dart';
 import 'package:grocery_store/providers/order_provider.dart';
 import 'package:grocery_store/providers/randomuser_provider.dart';
@@ -44,6 +45,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => RandomuserProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CommentProvider(),
         ),
       ],
       child: const GetMaterialApp(
