@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:grocery_store/constant/appcolor.dart';
 import 'package:grocery_store/model/comment_model.dart';
 import 'package:grocery_store/model/randomuser_model.dart';
+import 'package:grocery_store/pages/controller_page.dart';
 import 'package:grocery_store/pages/write_review_page.dart';
 import 'package:grocery_store/providers/comment_provider.dart';
 import 'package:grocery_store/providers/randomuser_provider.dart';
@@ -105,6 +106,16 @@ class _ReviewPageState extends State<ReviewPage> {
       backgroundColor: AppColor.appBarColor,
       centerTitle: true,
       title: const Text("Reviews"),
+      leading: IconButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              PageTransition(
+                  child: const ControllerPage(),
+                  type: PageTransitionType.leftToRight));
+        },
+        icon: const Icon(Icons.arrow_back),
+      ),
       actions: [
         IconButton(
           onPressed: () {
@@ -128,8 +139,8 @@ class _ReviewPageState extends State<ReviewPage> {
     List<CommentModel> commentList =
         context.watch<CommentProvider>().commentList;
 
-    // return _buildListView(randomUserModel.results, commentList, context);
-    return _buildCommentListView(commentList, context);
+    return _buildListView(randomUserModel.results, commentList, context);
+    // return _buildCommentListView(commentList, context);
   }
 
   Widget _buildCommentListView(List<CommentModel> items, BuildContext context) {
@@ -155,9 +166,15 @@ class _ReviewPageState extends State<ReviewPage> {
         },
         child: ListView.builder(
           physics: const BouncingScrollPhysics(),
-          itemCount: items.length,
+          itemCount: coms.length + items.length,
           itemBuilder: (context, index) {
-            return _buildItem(items[index]);
+            if (index < coms.length) {
+              // Display comment items first
+              return _buildCommentItem(coms[index]);
+            } else {
+              // Display the remaining items
+              return _buildItem(items[index - coms.length]);
+            }
           },
         ),
       ),
@@ -213,7 +230,7 @@ class _ReviewPageState extends State<ReviewPage> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text("4"),
+              const Text("4.5"),
               const SizedBox(
                 width: 5,
               ),
@@ -223,6 +240,11 @@ class _ReviewPageState extends State<ReviewPage> {
                   color: Colors.amber,
                   size: 18,
                 ),
+              const Icon(
+                CupertinoIcons.star_lefthalf_fill,
+                color: Colors.amber,
+                size: 18,
+              ),
             ],
           ),
           const SizedBox(

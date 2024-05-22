@@ -1,6 +1,8 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 
 void snackBar(BuildContext context) {
   final materialBanner = MaterialBanner(
@@ -28,17 +30,17 @@ void snackBar(BuildContext context) {
 Widget fackeToggle(String text) {
   return Row(
     children: [
-      Icon(
+      const Icon(
         Icons.toggle_on,
         color: Color(0xff6CC51D),
         size: 40,
       ),
-      SizedBox(
+      const SizedBox(
         width: 5,
       ),
       Text(
         text,
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -48,17 +50,26 @@ Widget fackeToggle(String text) {
 
 AppBar myAppBar(void Function()? onPressed, String text) {
   return AppBar(
-    backgroundColor: Color(0xffffffff),
+    backgroundColor: const Color(0xffffffff),
     centerTitle: true,
     title: Text(text),
     actions: [
       IconButton(
         onPressed: onPressed,
-        icon: Icon(CupertinoIcons.add_circled),
+        icon: const Icon(CupertinoIcons.add_circled),
         iconSize: 25,
       ),
     ],
   );
 }
 
-
+SnackbarController mySnackBar(String title, String subtitle, IconData icon) {
+  return Get.snackbar(
+    title,
+    subtitle,
+    colorText: Colors.black,
+    icon: Icon(
+      icon,
+    ),
+  );
+}

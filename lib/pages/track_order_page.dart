@@ -2,12 +2,12 @@
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:grocery_store/components/timeline_tile.dart';
+import 'package:grocery_store/helper/util.dart';
 import 'package:grocery_store/model/order_model.dart';
 import 'package:grocery_store/providers/order_provider.dart';
-import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class TrackOrderPage extends StatefulWidget {
   const TrackOrderPage({super.key});
@@ -73,14 +73,8 @@ class _TrackOrderPageState extends State<TrackOrderPage> {
     });
     playSound(); // Play sound after order is delivered
 
-    Get.snackbar(
-      "Message",
-      "Your order has been delivered to your front door.",
-      colorText: Colors.black,
-      icon: Icon(
-        Icons.shopping_cart,
-      ),
-    );
+    mySnackBar("Message", "Your order has been delivered to your front door.",
+        Icons.shopping_cart);
   }
 
   @override
@@ -153,7 +147,7 @@ class _TrackOrderPageState extends State<TrackOrderPage> {
                           width: 10,
                         ),
                         Text(
-                          "Items: ${"\$" + (orders[orders.length - 1].itemPrice + 1.6).toStringAsFixed(2)}",
+                          "Items: ${"\$${(orders[orders.length - 1].itemPrice + 1.6).toStringAsFixed(2)}"}",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),

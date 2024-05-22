@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:grocery_store/components/banner.dart';
-import 'package:grocery_store/components/categories.dart';
+import 'package:grocery_store/components/per_category.dart';
 import 'package:grocery_store/components/product.dart';
 import 'package:grocery_store/components/search_bar.dart';
 import 'package:grocery_store/model/fruit_model.dart';
@@ -140,10 +140,30 @@ class _HomePageState extends State<HomePage>
                     ],
                   ),
                 ),
-                Categories(
-                  cates: cates,
-                  colors: colors,
-                  fruits: fruits,
+                Container(
+                  height: 90,
+                  padding: const EdgeInsets.only(left: 17),
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      for (int i = 0; i < cates.length; i++)
+                        Padding(
+                          padding: const EdgeInsets.only(right: 16),
+                          child: PerCategory(
+                            cates: cates[i],
+                            colors: colors[i],
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      child: ProductPage(
+                                          fruits: fruits, title: cates[i][0]),
+                                      type: PageTransitionType.bottomToTop));
+                            },
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
 
                 //features product

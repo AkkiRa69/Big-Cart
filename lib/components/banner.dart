@@ -4,7 +4,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class MyBanner extends StatelessWidget {
   MyBanner({super.key});
   final PageController _controller = PageController();
-   final List<String> posters = [
+  final List<String> posters = [
     "poster1.jpg",
     "poster3.jpg",
     "poster4.jpg",
@@ -15,14 +15,14 @@ class MyBanner extends StatelessWidget {
     return Stack(
       alignment: Alignment.topLeft,
       children: [
-        Container(
+        SizedBox(
           height: 250,
           child: PageView.builder(
             controller: _controller,
             itemCount: posters.length,
             itemBuilder: (context, index) {
               return Container(
-                padding: EdgeInsets.symmetric(horizontal: 17),
+                padding: const EdgeInsets.symmetric(horizontal: 17),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: Image.asset(
@@ -40,7 +40,7 @@ class MyBanner extends StatelessWidget {
           child: SmoothPageIndicator(
             controller: _controller,
             count: posters.length,
-            effect: WormEffect(
+            effect: const WormEffect(
               activeDotColor: Color(0xFF6CC51D),
               dotColor: Colors.white,
               dotHeight: 7,

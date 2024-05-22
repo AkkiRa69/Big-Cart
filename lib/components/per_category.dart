@@ -17,7 +17,7 @@ class PerCategory extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: Color(0xFFFFFBFB),
+          color: const Color(0xFFFFFBFB),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
@@ -27,7 +27,7 @@ class PerCategory extends StatelessWidget {
               alignment: Alignment.center,
               height: 60,
               decoration: BoxDecoration(color: colors, shape: BoxShape.circle),
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: Image.asset(
                 cates[1],
                 fit: BoxFit.cover,

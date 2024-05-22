@@ -6,9 +6,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:grocery_store/components/liner_button.dart';
 import 'package:grocery_store/constant/appcolor.dart';
 import 'package:grocery_store/model/comment_model.dart';
+import 'package:grocery_store/model/fruit_model.dart';
 import 'package:grocery_store/model/randomuser_model.dart';
+import 'package:grocery_store/pages/review_page.dart';
 import 'package:grocery_store/providers/comment_provider.dart';
 import 'package:grocery_store/providers/randomuser_provider.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 class WriteReviewPage extends HookWidget {
@@ -135,6 +138,13 @@ class WriteReviewPage extends HookWidget {
                         pic: items[randomNum].picture.medium,
                         rate: rating.value);
                     context.read<CommentProvider>().addComment(com);
+                    Navigator.push(
+                        context,
+                        PageTransition(
+                            isIos: true,
+                            duration: const Duration(milliseconds: 300),
+                            child: const ReviewPage(),
+                            type: PageTransitionType.leftToRight));
                   },
                 ),
               ),
