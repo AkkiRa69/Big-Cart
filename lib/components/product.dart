@@ -92,7 +92,7 @@ class _ProductState extends State<Product> {
             ),
             SizedBox(height: 5),
             Divider(
-              color: Colors.grey[300],
+              color: Colors.grey[200],
             ),
             Expanded(
               child: Padding(

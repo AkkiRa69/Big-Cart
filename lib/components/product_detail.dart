@@ -8,7 +8,7 @@ import 'package:grocery_store/providers/fruit_provider.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
-class ProductDetail extends StatelessWidget {
+class ProductDetail extends StatefulWidget {
   final FruitModel fruit;
   final void Function()? increment;
   final void Function()? decrement;
@@ -20,6 +20,13 @@ class ProductDetail extends StatelessWidget {
       required this.decrement,
       required this.increment});
 
+  @override
+  State<ProductDetail> createState() => _ProductDetailState();
+}
+
+bool isFav = false;
+
+class _ProductDetailState extends State<ProductDetail> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,28 +44,43 @@ class ProductDetail extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "\$${fruit.price.toStringAsFixed(2)}",
+                  "\$${widget.fruit.price.toStringAsFixed(2)}",
                   style: TextStyle(
                     color: Colors.green,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Icon(
-                  Icons.favorite_border,
-                  color: Colors.grey,
+                IconButton(
+                  onPressed: () {
+                    context
+                        .read<FruitProvider>()
+                        .addProductToFavorites(widget.fruit);
+                    setState(() {
+                      widget.fruit.isFav = !widget.fruit.isFav;
+                      isFav = !isFav;
+                      if (!widget.fruit.isFav || !isFav) {
+                        context
+                            .read<FruitProvider>()
+                            .removeProductFavorite(widget.fruit);
+                      }
+                    });
+                  },
+                  icon: isFav
+                      ? Icon(Icons.favorite, color: Colors.pink)
+                      : Icon(Icons.favorite_border),
                 ),
               ],
             ),
             Text(
-              fruit.name,
+              widget.fruit.name,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
-              fruit.weight,
+              widget.fruit.weight,
               style: TextStyle(
                 color: Colors.grey,
               ),
@@ -67,17 +89,17 @@ class ProductDetail extends StatelessWidget {
               height: 7,
             ),
             GestureDetector(
-              onTap: onTap,
+              onTap: widget.onTap,
               child: Row(
                 children: [
                   Text(
-                    fruit.rate.toString(),
+                    widget.fruit.rate.toString(),
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     width: 3,
                   ),
-                  for (int i = 0; i < fruit.rate; i++)
+                  for (int i = 0; i < widget.fruit.rate; i++)
                     Row(
                       children: [
                         Icon(
@@ -88,7 +110,7 @@ class ProductDetail extends StatelessWidget {
                       ],
                     ),
                   Text(
-                    "(${fruit.review} reviews)",
+                    "(${widget.fruit.review} reviews)",
                     style: TextStyle(
                       color: Colors.grey[500],
                     ),
@@ -101,7 +123,7 @@ class ProductDetail extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 15, bottom: 10),
               child: Text(
-                fruit.description,
+                widget.fruit.description,
                 style: TextStyle(color: Colors.grey),
               ),
             ),
@@ -126,7 +148,7 @@ class ProductDetail extends StatelessWidget {
                     children: [
                       IconButton(
                         color: Colors.green,
-                        onPressed: decrement,
+                        onPressed: widget.decrement,
                         icon: Icon(
                           CupertinoIcons.minus,
                         ),
@@ -135,14 +157,14 @@ class ProductDetail extends StatelessWidget {
                         alignment: Alignment.center,
                         width: 50,
                         child: Text(
-                          (fruit.qty).toString(),
+                          (widget.fruit.qty).toString(),
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18),
                         ),
                       ),
                       IconButton(
                         color: Colors.green,
-                        onPressed: increment,
+                        onPressed: widget.increment,
                         icon: Icon(
                           CupertinoIcons.add,
                         ),
@@ -183,7 +205,7 @@ class ProductDetail extends StatelessWidget {
                           duration: Duration(milliseconds: 300),
                           child: ShoppingCartPage(),
                           type: PageTransitionType.rightToLeft));
-                  context.read<FruitProvider>().addProductToCart(fruit);
+                  context.read<FruitProvider>().addProductToCart(widget.fruit);
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

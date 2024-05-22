@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage>
                       context,
                       PageTransition(
                           child: SearchTapPage(),
-                          type: PageTransitionType.topToBottom),
+                          type: PageTransitionType.leftToRight),
                     );
                   },
                   onTap: () {
@@ -199,7 +199,7 @@ class _HomePageState extends State<HomePage>
                   itemBuilder: (context, index) {
                     int firstIndex = index * 2;
                     int secondIndex = firstIndex + 1;
-                    double height = 285;
+                    double height = 280;
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 17.0),
                       child: Row(

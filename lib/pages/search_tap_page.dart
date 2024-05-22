@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_store/constant/appcolor.dart';
+import 'package:grocery_store/model/fruit_model.dart';
 import 'package:grocery_store/pages/controller_page.dart';
+import 'package:grocery_store/pages/product_page.dart';
+import 'package:grocery_store/providers/fruit_provider.dart';
 import 'package:grocery_store/providers/search_provider.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -96,9 +99,21 @@ class _SearchTapPageState extends State<SearchTapPage> {
                         if (value.isEmpty) {
                           return;
                         }
+                        search.text = "";
                         context
                             .read<SearchProvider>()
                             .addTextToSearchHis(value);
+                        List<FruitModel> fruits =
+                            context.read<FruitProvider>().fruitList;
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                duration: const Duration(milliseconds: 500),
+                                child: ProductPage(
+                                  fruits: fruits,
+                                  title: value,
+                                ),
+                                type: PageTransitionType.bottomToTop));
                       },
                     ),
                   ),
