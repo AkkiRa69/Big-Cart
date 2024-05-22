@@ -6,7 +6,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:grocery_store/components/liner_button.dart';
 import 'package:grocery_store/constant/appcolor.dart';
 import 'package:grocery_store/model/comment_model.dart';
-import 'package:grocery_store/model/fruit_model.dart';
 import 'package:grocery_store/model/randomuser_model.dart';
 import 'package:grocery_store/pages/review_page.dart';
 import 'package:grocery_store/providers/comment_provider.dart';
