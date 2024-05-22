@@ -58,15 +58,14 @@ class _ProductDetailState extends State<ProductDetail> {
                         .addProductToFavorites(widget.fruit);
                     setState(() {
                       widget.fruit.isFav = !widget.fruit.isFav;
-                      isFav = !isFav;
-                      if (!widget.fruit.isFav || !isFav) {
+                      if (!widget.fruit.isFav) {
                         context
                             .read<FruitProvider>()
                             .removeProductFavorite(widget.fruit);
                       }
                     });
                   },
-                  icon: isFav
+                  icon: widget.fruit.isFav
                       ? Icon(Icons.favorite, color: Colors.pink)
                       : Icon(Icons.favorite_border),
                 ),

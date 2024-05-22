@@ -4,6 +4,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:grocery_store/model/fruit_model.dart';
 
 class FruitProvider extends ChangeNotifier {
+  final List _cates = [
+    ["Vegetables", "assets/icons/Vegetables.png"],
+    ["Fruits", "assets/icons/Fruits.png"],
+    ["Beverages", "assets/icons/Beverages.png"],
+    ["Grocery", "assets/icons/Grocery.png"],
+    ["Edible Oil", "assets/icons/Edible_oil.png"],
+    ["Household", "assets/icons/Household.png"],
+    ["Babycare", "assets/icons/baby.png"],
+  ];
+  List get cates => _cates;
   List<FruitModel> _fruits = [
     FruitModel(
       name: "Fresh Peach",

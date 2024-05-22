@@ -17,7 +17,6 @@ class PerCategory extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: const Color(0xFFFFFBFB),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(

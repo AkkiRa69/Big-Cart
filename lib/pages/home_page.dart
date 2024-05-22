@@ -25,16 +25,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
-  final List cates = [
-    ["Vegetables", "assets/icons/Vegetables.png"],
-    ["Fruits", "assets/icons/Fruits.png"],
-    ["Beverages", "assets/icons/Beverages.png"],
-    ["Grocery", "assets/icons/Grocery.png"],
-    ["Edible Oil", "assets/icons/Edible_oil.png"],
-    ["Household", "assets/icons/Household.png"],
-    ["Babycare", "assets/icons/baby.png"],
-  ];
-
   final List<Color> colors = [
     Color(0xFFE6F2EA),
     Color(0xFFFFE9E5),
@@ -60,6 +50,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     super.build(context);
     List<FruitModel> fruits = context.watch<FruitProvider>().fruitList;
+    List cates = context.watch<FruitProvider>().cates;
     return DefaultTabController(
       length: cates.length,
       child: Scaffold(
