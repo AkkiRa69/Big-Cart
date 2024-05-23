@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grocery_store/pages/intro_page.dart';
+import 'package:grocery_store/pages/splash_screen.dart';
 import 'package:grocery_store/providers/address_provider.dart';
 import 'package:grocery_store/providers/card_provider.dart';
 import 'package:grocery_store/providers/comment_provider.dart';
@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
       ],
       child: const GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        home: IntroPage(),
+        home: SplashScreen(),
       ),
     );
   }
