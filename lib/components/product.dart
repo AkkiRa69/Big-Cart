@@ -13,7 +13,7 @@ class Product extends StatefulWidget {
     required this.fruits,
     required this.onTap,
     required this.onPressed,
-    this.isFav = false,
+    required this.isFav,
   });
 
   @override

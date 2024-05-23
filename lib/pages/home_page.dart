@@ -7,6 +7,7 @@ import 'package:grocery_store/components/product.dart';
 import 'package:grocery_store/components/search_bar.dart';
 import 'package:grocery_store/model/fruit_model.dart';
 import 'package:grocery_store/pages/category_page.dart';
+import 'package:grocery_store/pages/controller_page.dart';
 import 'package:grocery_store/pages/filter_page.dart';
 import 'package:grocery_store/pages/product_detail_page.dart';
 import 'package:grocery_store/pages/product_page.dart';
@@ -41,6 +42,13 @@ class _HomePageState extends State<HomePage>
       PageTransition(
           child: ProductDetailPage(
             fruit: fruits,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      child: ControllerPage(),
+                      type: PageTransitionType.leftToRight));
+            },
           ),
           type: PageTransitionType.rightToLeft),
     );
@@ -141,6 +149,7 @@ class _HomePageState extends State<HomePage>
                         Padding(
                           padding: const EdgeInsets.only(right: 16),
                           child: PerCategory(
+                            backColor: Colors.transparent,
                             cates: cates[i],
                             colors: colors[i],
                             onTap: () {

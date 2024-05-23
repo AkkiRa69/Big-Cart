@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_store/components/product.dart';
 import 'package:grocery_store/model/fruit_model.dart';
+import 'package:grocery_store/pages/controller_page.dart';
 import 'package:grocery_store/pages/home_page.dart';
 import 'package:grocery_store/pages/product_detail_page.dart';
 import 'package:grocery_store/providers/fruit_provider.dart';
@@ -25,6 +26,14 @@ class _ProductPageState extends State<ProductPage> {
       PageTransition(
           child: ProductDetailPage(
             fruit: fruits,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      child: ProductPage(
+                          fruits: widget.fruits, title: widget.title),
+                      type: PageTransitionType.leftToRight));
+            },
           ),
           type: PageTransitionType.rightToLeft),
     );
@@ -40,6 +49,16 @@ class _ProductPageState extends State<ProductPage> {
         backgroundColor: Color(0xFFFFFFFF),
         title: Text(widget.title),
         centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                PageTransition(
+                    child: ControllerPage(),
+                    type: PageTransitionType.leftToRight));
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
         actions: [
           IconButton(
             onPressed: () {},

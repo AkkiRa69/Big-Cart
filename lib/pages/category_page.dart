@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:grocery_store/components/per_category.dart';
+import 'package:grocery_store/constant/appcolor.dart';
 import 'package:grocery_store/pages/product_page.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -51,10 +52,10 @@ class CategoryPage extends StatelessWidget {
             crossAxisCount: 3,
             mainAxisSpacing: 15,
             crossAxisSpacing: 12,
-            
           ),
           itemBuilder: (context, index) {
             return PerCategory(
+              backColor: AppColor.appBarColor,
               onTap: () {
                 nvagateToCategory(context, index);
               },

@@ -5,11 +5,11 @@ import 'package:grocery_store/model/fruit_model.dart';
 
 class FruitProvider extends ChangeNotifier {
   final List _cates = [
-    ["Vegetables", "assets/icons/Vegetables.png"],
-    ["Fruits", "assets/icons/Fruits.png"],
+    ["Vegetables", "assets/icons/speii.png"],
+    ["Fruits", "assets/icons/pom.png"],
     ["Beverages", "assets/icons/Beverages.png"],
-    ["Grocery", "assets/icons/Grocery.png"],
-    ["Edible Oil", "assets/icons/Edible_oil.png"],
+    ["Grocery", "assets/icons/cartbag.png"],
+    ["Edible Oil", "assets/icons/potion.png"],
     ["Household", "assets/icons/Household.png"],
     ["Babycare", "assets/icons/baby.png"],
   ];

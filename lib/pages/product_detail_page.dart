@@ -9,7 +9,8 @@ import 'package:page_transition/page_transition.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final FruitModel fruit;
-  const ProductDetailPage({super.key, required this.fruit});
+  final void Function()? onPressed;
+  const ProductDetailPage({super.key, required this.fruit,required this.onPressed});
 
   @override
   State<ProductDetailPage> createState() => _ProductDetailPageState();
@@ -37,6 +38,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       extendBodyBehindAppBar: true,
       backgroundColor: Color(0xFFFFFFFF),
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: widget.onPressed,
+          icon: Icon(Icons.arrow_back),
+        ),
         backgroundColor: Colors.transparent,
       ),
       body: Column(

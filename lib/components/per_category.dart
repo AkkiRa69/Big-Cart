@@ -4,10 +4,12 @@ class PerCategory extends StatelessWidget {
   final List cates;
   final Color colors;
   final void Function()? onTap;
+  final Color backColor;
   const PerCategory(
       {super.key,
       required this.cates,
       required this.colors,
+      required this.backColor,
       required this.onTap});
 
   @override
@@ -17,6 +19,7 @@ class PerCategory extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
+          color: backColor,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
